@@ -1,11 +1,10 @@
 {
-	"id": "obsidian-sample-plugin",
-	"name": "Sample Plugin",
+	"id": "keep-mermaid-arrow",
+	"name": "Keep Mermaid Arrows",
 	"version": "1.0.0",
 	"minAppVersion": "0.15.0",
-	"description": "This is a sample plugin for Obsidian. This plugin demonstrates some of the capabilities of the Obsidian API.",
-	"author": "Obsidian",
-	"authorUrl": "https://obsidian.md",
-	"fundingUrl": "https://obsidian.md/pricing",
-	"isDesktopOnly": false
+	"description": "When using Mermaid to create graphs in Obsidian, a bug makes the arrows disappear sometimes. This plugin is a hack that keeps those arrows visible.",
+	"author": "Bunker D",
+	"authorUrl": "https://github.com/Bunker-D",
+	"isDesktopOnly": true
 }
