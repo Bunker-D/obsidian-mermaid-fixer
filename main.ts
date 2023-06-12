@@ -1,6 +1,6 @@
 import { DIAGRAM_TYPES, DiagramType } from 'mermaid_data';
 import { MermaidDefinitions } from 'mermaid_definitions';
-import { Plugin, addIcon, Notice } from 'obsidian';
+import { App, Notice, Plugin, PluginSettingTab, Setting, addIcon } from 'obsidian';
 import { SVGContent } from 'base_types';
 
 
@@ -22,62 +22,52 @@ const BUTTON_ICON = `
 		</g>
 	`;
 
+interface MermaidArrowSaverSettings {
+	selectedDiagramTypes: DiagramType[];
+};
+
+const DEFAULT_SETTINGS: MermaidArrowSaverSettings = {
+	selectedDiagramTypes: [ 'flowchart', 'classDiagram' ], //TODO better default settings
+};
+
 export default class MermaidArrowSaver extends Plugin {
+	settings: MermaidArrowSaverSettings;
+
 	async onload() {
-		// const mermaidMarkers = `
-		// 		<g fill="currentColor" stroke="currentColor">
-		// 			<marker id="flowchart-pointEnd" class="marker flowchart" viewBox="0 0 10 10" refX="10" refY="5"
-		// 				markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto">
-		// 				<path d="M 0 0 L 10 5 L 0 10 z" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></path>
-		// 			</marker>
-		// 			<marker id="flowchart-pointStart" class="marker flowchart" viewBox="0 0 10 10" refX="0" refY="5"
-		// 				markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto">
-		// 				<path d="M 0 5 L 10 10 L 10 0 z" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></path>
-		// 			</marker>
-		// 			<marker id="flowchart-circleEnd" class="marker flowchart" viewBox="0 0 10 10" refX="11" refY="5"
-		// 				markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto">
-		// 				<circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></circle>
-		// 			</marker>
-		// 			<marker id="flowchart-circleStart" class="marker flowchart" viewBox="0 0 10 10" refX="-1" refY="5"
-		// 				markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto">
-		// 				<circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></circle>
-		// 			</marker>
-		// 			<marker id="flowchart-crossEnd" class="marker cross flowchart" viewBox="0 0 11 11" refX="12" refY="5.2"
-		// 				markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto">
-		// 				<path d="M 1,1 l 9,9 M 10,1 l -9,9" class="arrowMarkerPath" style="stroke-width: 2; stroke-dasharray: 1, 0;"></path>
-		// 			</marker>
-		// 			<marker id="flowchart-crossStart" class="marker cross flowchart" viewBox="0 0 11 11" refX="-1" refY="5.2"
-		// 				markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto">
-		// 				<path d="M 1,1 l 9,9 M 10,1 l -9,9" class="arrowMarkerPath" style="stroke-width: 2; stroke-dasharray: 1, 0;"></path>
-		// 			</marker>
-		// 		</g>
-		// 	`;
-		// const iconPath = ( EMPTY_ICON ) ? '' : ARROW_ICON;
-		// const iconFullSVG = ( mermaidMarkers + iconPath ).trim().replace( /\s+/g, ' ' );
-		// const iconName = 'mermaidMarkers';
-		// addIcon( iconName, iconFullSVG );
-		// this.addRibbonIcon( iconName, 'Mermaid markers', ( evt: MouseEvent ) => {
-		// 	new Notice( 'This button keeps Mermaid arrows visible.\nClicking it does nothing.' );
-		// } );
-		
-		
-		this.oneButtonPerDiagramType(); //HACK
+		await this.loadSettings();
+		this.addButtonForDiagramTypes( this.settings.selectedDiagramTypes );
 	}
 
-	onunload() {}
+	async loadSettings() {
+		this.settings = { ...DEFAULT_SETTINGS, ...( await this.loadData() ) };
+	}
+
+	addButtonForDiagramTypes( diagramTypes: DiagramType[] ) { //HACK
+		const definitions = new MermaidDefinitions( diagramTypes );
+		const defSVG = definitions.getDefinitions();
+		const iconName = `mermaid-redef`;
+		addIcon( iconName, defSVG + BUTTON_ICON );
+		this.addRibbonIcon( iconName, 'Mermaid Arrow Saver', this.addOnButtonClick );
+	}
+
+	addOnButtonClick( evt: MouseEvent ) {
+		new Notice( 'This button keep Mermaid arrows visible.\nClicking it does nothing.' );
+	}
+
+	// ▼ HACKS FOR DEV EXPERIMENTS
 
 	oneButtonPerDiagramType() { //HACK
 		let diagramType: DiagramType;
 		for ( diagramType in DIAGRAM_TYPES ) {
-			this.addButtonForDiagramType( diagramType );
+			this.addButtonForSingleDiagramType( diagramType );
 		}
 	}
 
-	addButtonForDiagramType( diagramType: DiagramType ) { //HACK
+	addButtonForSingleDiagramType( diagramType: DiagramType ) { //HACK
 		const definitions = new MermaidDefinitions( [ diagramType ] );
 		const defSVG = definitions.getDefinitions().replace( '<defs>', `<defs id="${ this.getRedefID( diagramType ) }">` );
 		const iconName = `mermaid-redef-${ diagramType }`;
-		const buttonName = `Mermaid ${diagramType}`
+		const buttonName = `Mermaid ${ diagramType }`;
 		addIcon( iconName, defSVG + BUTTON_ICON );
 		this.addRibbonIcon( iconName, buttonName, this.getDisplayToggler( diagramType ) );
 	}
@@ -92,47 +82,31 @@ export default class MermaidArrowSaver extends Plugin {
 	}
 }
 
-// class SampleModal extends Modal {
-// 	constructor( app: App ) {
-// 		super( app );
-// 	}
+class MermaidArrowSaverSettingTab extends PluginSettingTab {
+	plugin: MermaidArrowSaver;
 
-// 	onOpen() {
-// 		const { contentEl } = this;
-// 		contentEl.setText( 'Woah!' );
-// 	}
+	constructor( app: App, plugin: MermaidArrowSaver ) {
+		super( app, plugin );
+		this.plugin = plugin;
+	}
 
-// 	onClose() {
-// 		const { contentEl } = this;
-// 		contentEl.empty();
-// 	}
-// }
+	display(): void {
+		const { containerEl } = this;
+		containerEl.empty();
+		containerEl.createEl( 'h2', { text: 'Settings for my awesome plugin.' } );
+		// TODO
+		// new Setting( containerEl )
+		// 	.setName( 'Setting #1' )
+		// 	.setDesc( 'It\'s a secret' )
+		// 	.addText( text => text
+		// 		.setPlaceholder( 'Enter your secret' )
+		// 		.setValue( this.plugin.settings.mySetting )
+		// 		.onChange( async ( value ) => {
+		// 			console.log( 'Secret: ' + value );
+		// 			this.plugin.settings.mySetting = value;
+		// 			await this.plugin.saveSettings();
+		// 		} ) );
+	}
 
-// class SampleSettingTab extends PluginSettingTab {
-// 	plugin: MyPlugin;
+}
 
-// 	constructor( app: App, plugin: MyPlugin ) {
-// 		super( app, plugin );
-// 		this.plugin = plugin;
-// 	}
-
-// 	display(): void {
-// 		const { containerEl } = this;
-
-// 		containerEl.empty();
-
-// 		containerEl.createEl( 'h2', { text: 'Settings for my awesome plugin.' } );
-
-// 		new Setting( containerEl )
-// 			.setName( 'Setting #1' )
-// 			.setDesc( 'It\'s a secret' )
-// 			.addText( text => text
-// 				.setPlaceholder( 'Enter your secret' )
-// 				.setValue( this.plugin.settings.mySetting )
-// 				.onChange( async ( value ) => {
-// 					console.log( 'Secret: ' + value );
-// 					this.plugin.settings.mySetting = value;
-// 					await this.plugin.saveSettings();
-// 				} ) );
-// 	}
-// }
