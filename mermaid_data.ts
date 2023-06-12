@@ -4,12 +4,28 @@
 	- The defined markers and symbols that may suffer from duplicated IDs.
 */
 
-import type { ChartType, ID, SVGContent } from "types";
+import type { ID, SVGContent } from "types";
 
 /**
- * Lists the Mermaid chart types (ID and description). It is used by the plugin setting tabs.
+ * Lists the covered Mermaid chart types.
  */
-export const CHART_TYPES: { [ key: ChartType ]: string; } = {
+export type ChartType =
+	'flowchart' |
+	'sequenceDiagram' |
+	'classDiagram' |
+	'stateDiagram' |
+	'erDiagram' |
+	'journey' |
+	'gantt' |
+	'pie' |
+	'requirementDiagram' |
+	'gitGraph' |
+	'C4Context';
+
+/**
+ * Name for the Mermaid chart types in the UI.
+ */
+export const CHART_TYPES: { [ Property in ChartType ]: string; } = {
 	flowchart:
 		'Flowchart (`flowchart`/`graph`)',
 	sequenceDiagram:
@@ -41,7 +57,7 @@ export const CHART_TYPES: { [ key: ChartType ]: string; } = {
  * - They must be normalized so that the strings are identical if the produced DOM Elements are identical.
  * - They must generally be completed with proper `fill` and `stroke` attributes.
  */
-export const MERMAID_DEFINITIONS_BY_CHART_TYPE: { [ key: ChartType ]: { [ key: ID ]: SVGContent; }; } = {
+export const MERMAID_DEFINITIONS_BY_CHART_TYPE: { [ Property in ChartType ]: { [ key: ID ]: SVGContent; }; } = {
 	flowchart: {
 		'flowchart-pointEnd':
 			'<marker id="flowchart-pointEnd" class="marker flowchart" viewBox="0 0 10 10" refX="10" refY="5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></path></marker>',
