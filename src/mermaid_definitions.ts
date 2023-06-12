@@ -1,6 +1,6 @@
 
-import { SVGContent } from "base_types";
-import { DiagramType, MERMAID_DEFINITIONS_BY_CHART_TYPE } from "mermaid_data";
+import { SVGContent } from "src/base_types";
+import { DiagramType, MERMAID_DEFINITIONS_BY_CHART_TYPE } from "src/mermaid_data";
 
 export class MermaidDefinitions {
 

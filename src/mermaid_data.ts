@@ -4,7 +4,7 @@
 	- The defined markers and symbols that may suffer from duplicated IDs.
 */
 
-import type { ID, SVGContent } from "base_types";
+import type { ID, SVGContent } from "src/base_types";
 
 /**
  * Lists the covered Mermaid chart types.
