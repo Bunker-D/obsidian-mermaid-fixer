@@ -1,2 +1,1 @@
-import MermaidArrowSaver from "src/plugin";
-export default MermaidArrowSaver;
+export { default } from "src/plugin";
