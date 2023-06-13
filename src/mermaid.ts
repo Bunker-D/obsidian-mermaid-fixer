@@ -1,6 +1,6 @@
-import { MERMAID_DATA, DiagramType, MarkerID, SVGContent } from './mermaid_data';
+import { MERMAID_DATA, DiagramType, MarkerID, SVGContent } from './mermaidData';
 
-export type { DiagramType, SVGContent, MarkerID } from './mermaid_data';
+export type { DiagramType, SVGContent, MarkerID } from './mermaidData';
 export type MarkersByID = { [ key: MarkerID ]: SVGContent; };
 export type MarkersByDiagramType = { [ key in DiagramType ]?: SVGContent; };
 

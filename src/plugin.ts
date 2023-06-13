@@ -1,8 +1,8 @@
 import { Notice, Plugin, addIcon } from 'obsidian';
 import { DiagramType } from './mermaid';
-import { MermaidDefinitions } from './mermaid_definitions';
+import { MermaidDefinitions } from './mermaidDefinitions';
 import { BUTTON_ICON } from './icons';
-import { MermaidArrowSaverSettingTab } from './settings_tab';
+import { MermaidArrowSaverSettingTab } from './settingsTab';
 
 //TODO Setting page for selecting the covered chart types
 //TODO The setting page must inform of conflicts

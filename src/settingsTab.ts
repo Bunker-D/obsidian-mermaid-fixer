@@ -12,8 +12,7 @@ export class MermaidArrowSaverSettingTab extends PluginSettingTab {
 	display(): void {
 		const { containerEl } = this;
 		containerEl.empty();
-		containerEl.createEl( 'h2', { text: 'Settings for my awesome plugin.' } );
-		// TODO
+		// containerEl.createEl( 'h2', { text: 'Settings for my awesome plugin.' } );
 		// new Setting( containerEl )
 		// 	.setName( 'Setting #1' )
 		// 	.setDesc( 'It\'s a secret' )
