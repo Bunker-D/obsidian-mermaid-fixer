@@ -23,7 +23,7 @@ export class MermaidDefinitions {
 		}
 	}
 
-	public getSVGDefinitions(): SVGContent {
+	getSVGDefinitions(): SVGContent {
 		let definitions: SVGContent = '';
 		for ( const markerID in this.markersByIDThenDiagramType ) {
 			const markerDefinitions = Object.values( this.markersByIDThenDiagramType[ markerID ] );

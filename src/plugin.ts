@@ -28,16 +28,6 @@ export default class MermaidArrowSaver extends Plugin {
 		this.addSettingTab( new MermaidArrowSaverSettingTab( this.app, this ) );
 	}
 
-	async loadSettings() {
-		this.settings = { ...DEFAULT_SETTINGS, ...( await this.loadData() ) };
-	}
-
-	async saveSettings() {
-		console.log( 'SAVE SETTINGS:' );  //HACK
-		console.log( this.settings );     //HACK
-		// await this.saveData( this.settings );
-	}
-
 	getButtonVisibility(): boolean {
 		return this.settings.visibleButton;
 	}
@@ -58,7 +48,17 @@ export default class MermaidArrowSaver extends Plugin {
 		this.saveSettings();
 	}
 
-	addButtonForDiagramTypes( ): void {
+	private async loadSettings() {
+		this.settings = { ...DEFAULT_SETTINGS, ...( await this.loadData() ) };
+	}
+
+	private async saveSettings() {
+		console.log( 'SAVE SETTINGS:' );  //HACK
+		console.log( this.settings );     //HACK
+		// await this.saveData( this.settings );
+	}
+
+	private addButtonForDiagramTypes( ): void {
 		const definitions = new MermaidDefinitions(  this.settings.selectedDiagramTypes  );
 		const defSVG = `<defs id="${ BUTTON_DEFS_ID }">${ definitions.getSVGDefinitions() }</defs>`;
 		const buttonIcon = `<g id="${ BUTTON_PATH_ID }">${ ( this.settings.visibleButton ) ? BUTTON_ICON : '' }</g>`;
@@ -82,7 +82,7 @@ export default class MermaidArrowSaver extends Plugin {
 		this.toggleDefIDs();
 	}
 
-	applyButtonVisibility(): void {
+	private applyButtonVisibility(): void {
 		const buttonIconEl = document.getElementById( BUTTON_PATH_ID );
 		if ( !buttonIconEl ) return;
 		if ( this.settings.visibleButton ) {
@@ -92,14 +92,14 @@ export default class MermaidArrowSaver extends Plugin {
 		}
 	}
 
-	applyDiagramTypesSelection(): void {
+	private applyDiagramTypesSelection(): void {
 		const definitions = new MermaidDefinitions(  this.settings.selectedDiagramTypes  );
 		const definitionsEl = document.getElementById( BUTTON_DEFS_ID );
 		if ( !definitionsEl ) return;
 		definitionsEl.innerHTML = definitions.getSVGDefinitions();
 	}
 
-	toggleDefIDs() {
+	private toggleDefIDs() {
 		const defs = document.getElementById( BUTTON_DEFS_ID );
 		if ( !defs || !defs.firstElementChild ) return;
 		const firstID = defs.firstElementChild.id;
