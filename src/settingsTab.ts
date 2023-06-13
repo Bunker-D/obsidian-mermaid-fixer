@@ -1,10 +1,12 @@
-import { App, PluginSettingTab, Setting } from "obsidian";
-import MermaidArrowSaver from "./plugin";
-import { DiagramType, Mermaid } from "./mermaid";
+import { App, PluginSettingTab, Setting } from 'obsidian';
+import MermaidArrowSaver from './plugin';
+import { DiagramType, Mermaid } from './mermaid';
 
 export class MermaidArrowSaverSettingTab extends PluginSettingTab {
 	plugin: MermaidArrowSaver;
 	diagramTypesSelection: { [ key in DiagramType ]: boolean; };
+	conflictsSection: HTMLElement;
+	conflictsListEl: HTMLElement;
 
 	constructor( app: App, plugin: MermaidArrowSaver ) {
 		super( app, plugin );
@@ -41,6 +43,8 @@ export class MermaidArrowSaverSettingTab extends PluginSettingTab {
 		for ( diagramType in this.diagramTypesSelection ) {
 			this.buildDiagramTypeToggle( diagramType );
 		}
+		this.buildEmptyConflictSection();
+		this.updateConflicts();
 	}
 
 	private initializeDiagramTypeSelection(): void {
@@ -75,4 +79,51 @@ export class MermaidArrowSaverSettingTab extends PluginSettingTab {
 		this.plugin.setSelectedDiagramTypes( selectedDiagramTypes );
 	}
 
+	private buildEmptyConflictSection(): void {
+		this.conflictsSection = this.containerEl.createEl(
+			'div', { cls: 'callout mermaid-arrow-saver-setting-callout', attr: { 'data-callout': 'warning' } }
+		);
+		this.conflictsSection.createEl( 'h3', { text: 'Conflicts between selected diagram types:' } );
+		this.conflictsListEl = this.conflictsSection.createEl( 'ul' );
+	}
+
+	private updateConflicts(): void {
+		//TODO build conflicts from this.diagramTypesSelection
+		
+		const conflicts: { diagramTypes: DiagramType[], markerID: string; }[] = [ // HACK
+			{
+				diagramTypes: [ 'flowchart', 'classDiagram' ],
+				markerID: 'flow-class',
+			},
+			{
+				diagramTypes: [ 'flowchart', 'classDiagram', 'erDiagram' ],
+				markerID: 'flow-class-relationship',
+			},
+		];
+		for ( const conflict in conflicts ) {
+			this.addConflict( conflict );
+		}
+	}
+
+	private flushConflicts(): void {
+		this.conflictsListEl.empty(); 
+	}
+
+	private addConflict( conflict: any /*TODO*/ ): void {
+		this.conflictsListEl.createEl( 'li', 'conflict' ); //HACK
+		// TODO
+	}
+	/* Target conflict section:
+		<div class="mermaid-arrow-saver-warning" data-callout="warning">
+			<h2>
+				<ObsidianIcon icon="alert-triangle" />" Conflicts between diagram types"
+			</h2>
+			<ul>
+				<li>
+					<strong>Flowcharts</strong>, <strong>Class diagrams</strong> and <strong>Entity relationship diagrams</strong>
+					defines differents for id <code>test-id</code>
+				</li>
+			</ul>
+	</div>
+	*/
 }

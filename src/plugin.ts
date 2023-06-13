@@ -3,6 +3,7 @@ import { DiagramType } from './mermaid';
 import { MermaidDefinitions } from './mermaidDefinitions';
 import { BUTTON_ICON } from './icons'; import { MermaidArrowSaverSettingTab } from './settingsTab';
 
+//TODO button in non-dev mode opens the settings
 //IMPROVE Alternative option: select the chart types dynamically based on active tab?
 
 interface MermaidArrowSaverSettings {
