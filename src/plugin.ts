@@ -21,7 +21,8 @@ const DEFAULT_SETTINGS: MermaidArrowSaverSettings = {
 	selectedDiagramTypes: [ 'flowchart', 'classDiagram' ], //TODO better default settings
 };
 
-const DEFS_ID = 'mermaid-defs-saver';
+const DEV_MODE = true as const;
+const DEFS_ID = 'mermaid-defs-saver' as const;
 
 export default class MermaidArrowSaver extends Plugin {
 	settings: MermaidArrowSaverSettings;
@@ -31,20 +32,41 @@ export default class MermaidArrowSaver extends Plugin {
 		this.addButtonForDiagramTypes( this.settings.selectedDiagramTypes );
 	}
 
-	async loadSettings() {
+	private async loadSettings() {
 		this.settings = { ...DEFAULT_SETTINGS, ...( await this.loadData() ) };
 	}
 
-	addButtonForDiagramTypes( diagramTypes: DiagramType[] ) { //HACK
+	private addButtonForDiagramTypes( diagramTypes: DiagramType[] ) {
 		const definitions = new MermaidDefinitions( diagramTypes );
 		const defSVG = definitions.getSVGDefinitions( DEFS_ID );
-		console.log( defSVG );
 		addIcon( DEFS_ID, defSVG + BUTTON_ICON );
-		this.addRibbonIcon( DEFS_ID, 'Mermaid Arrow Saver', this.addOnButtonClick );
+		const onButtonClick = ( DEV_MODE ) ? this._devOnButtonClick : this.onButtonClick;
+		this.addRibbonIcon( DEFS_ID, 'Mermaid Arrow Saver', onButtonClick );
 	}
 
-	addOnButtonClick( evt: MouseEvent ) {
+	private onButtonClick( evt: MouseEvent ) {
 		new Notice( 'This button keep Mermaid arrows visible.\nClicking it does nothing.' );
+	}
+
+	private _devOnButtonClick() {
+		MermaidArrowSaver._toggleDefIDs();
+	}
+
+	private static _toggleDefIDs() {
+		console.log( 'DEV CLICK' );
+		const defs = document.getElementById( DEFS_ID );
+		console.log( defs );
+		if ( !defs || !defs.firstElementChild ) return;
+		const firstID = defs.firstElementChild.id;
+		const idsAreInactive = firstID.startsWith( '---' );
+		console.log( idsAreInactive );
+		const modID: ( id: string ) => string =
+			( idsAreInactive )
+				? ( id ) => id.substring( 3 )
+				: ( id ) => '---' + id;
+		for ( const marker of defs.children ) {
+			marker.id = modID( marker.id );
+		}
 	}
 
 	// ▼ HACKS FOR DEV EXPERIMENTS
