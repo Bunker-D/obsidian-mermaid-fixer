@@ -1,22 +1,18 @@
 import { Notice, Plugin, addIcon } from 'obsidian';
 import { DiagramType } from './mermaid';
 import { MermaidDefinitions } from './mermaidDefinitions';
-import { BUTTON_ICON } from './icons';
-import { MermaidArrowSaverSettingTab } from './settingsTab';
-
-//TODO Setting page for selecting the covered chart types
-//TODO The setting page must inform of conflicts
+import { BUTTON_ICON } from './icons'; import { MermaidArrowSaverSettingTab } from './settingsTab';
 
 //IMPROVE Alternative option: select the chart types dynamically based on active tab?
 
 interface MermaidArrowSaverSettings {
 	selectedDiagramTypes: DiagramType[];
-	emptyButton: boolean;
+	visibleButton: boolean;
 };
 
 const DEFAULT_SETTINGS: MermaidArrowSaverSettings = {
 	selectedDiagramTypes: [ 'flowchart', 'classDiagram' ], //HACK better default settings
-	emptyButton: false,
+	visibleButton: true,
 };
 
 const DEV_MODE = true as const;
@@ -28,18 +24,8 @@ export default class MermaidArrowSaver extends Plugin {
 
 	async onload() {
 		await this.loadSettings();
-		this.addButtonForDiagramTypes( this.settings.selectedDiagramTypes );
+		this.addButtonForDiagramTypes();
 		this.addSettingTab( new MermaidArrowSaverSettingTab( this.app, this ) );
-	}
-
-	getEmptyButtonSetting(): boolean {
-		return this.settings.emptyButton;
-	}
-	async setEmptyButtonSetting( emptyButton: boolean ) {
-		console.log( this );
-		this.settings.emptyButton = emptyButton;
-		this.applyEmptyButtonSetting();
-		this.saveSettings();
 	}
 
 	async loadSettings() {
@@ -52,10 +38,30 @@ export default class MermaidArrowSaver extends Plugin {
 		// await this.saveData( this.settings );
 	}
 
-	addButtonForDiagramTypes( diagramTypes: DiagramType[] ) {
-		const definitions = new MermaidDefinitions( diagramTypes );
-		const defSVG = definitions.getSVGDefinitions( BUTTON_DEFS_ID );
-		const buttonIcon = `<g id="${ BUTTON_PATH_ID }">${ ( this.settings.emptyButton ) ? '' : BUTTON_ICON }</g>`;
+	getButtonVisibility(): boolean {
+		return this.settings.visibleButton;
+	}
+
+	async setButtonVisibility( buttonVisibility: boolean ) {
+		this.settings.visibleButton = buttonVisibility;
+		this.applyButtonVisibility();
+		this.saveSettings();
+	}
+
+	getSelectedDiagramTypes(): DiagramType[] {
+		return this.settings.selectedDiagramTypes;
+	}
+
+	async setSelectedDiagramTypes( diagramType: DiagramType[] ) {
+		this.settings.selectedDiagramTypes = diagramType;
+		this.applyDiagramTypesSelection();
+		this.saveSettings();
+	}
+
+	addButtonForDiagramTypes( ): void {
+		const definitions = new MermaidDefinitions(  this.settings.selectedDiagramTypes  );
+		const defSVG = `<defs id="${ BUTTON_DEFS_ID }">${ definitions.getSVGDefinitions() }</defs>`;
+		const buttonIcon = `<g id="${ BUTTON_PATH_ID }">${ ( this.settings.visibleButton ) ? BUTTON_ICON : '' }</g>`;
 		addIcon( 'mermaid-arrow-saver', defSVG + buttonIcon );
 		this.addRibbonIcon( 'mermaid-arrow-saver', 'Mermaid Arrow Saver', this.createButtonFunction() );
 	}
@@ -67,23 +73,30 @@ export default class MermaidArrowSaver extends Plugin {
 		return ( e ) => { this.onButtonClick(); };
 	}
 
-	private onButtonClick() {
+	private onButtonClick(): void {
 		new Notice( 'This button keep Mermaid arrows visible.\nClicking it does nothing.' );
 	}
 
-	private onDevButtonClick() {
+	private onDevButtonClick(): void {
 		console.log( this );
 		this.toggleDefIDs();
 	}
 
-	applyEmptyButtonSetting() {
-		const buttonPath = document.getElementById( BUTTON_PATH_ID );
-		if ( !buttonPath ) return;
-		if ( this.settings.emptyButton ) {
-			buttonPath.innerHTML = '';
+	applyButtonVisibility(): void {
+		const buttonIconEl = document.getElementById( BUTTON_PATH_ID );
+		if ( !buttonIconEl ) return;
+		if ( this.settings.visibleButton ) {
+			buttonIconEl.innerHTML = BUTTON_ICON;
 		} else {
-			buttonPath.innerHTML = BUTTON_ICON;
+			buttonIconEl.innerHTML = '';
 		}
+	}
+
+	applyDiagramTypesSelection(): void {
+		const definitions = new MermaidDefinitions(  this.settings.selectedDiagramTypes  );
+		const definitionsEl = document.getElementById( BUTTON_DEFS_ID );
+		if ( !definitionsEl ) return;
+		definitionsEl.innerHTML = definitions.getSVGDefinitions();
 	}
 
 	toggleDefIDs() {

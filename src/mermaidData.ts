@@ -35,7 +35,7 @@ type DiagramData = { description: string, definitions: MarkerMap; };
 export const MERMAID_DATA: {[key in DiagramType]: DiagramData} = {
 	flowchart: {
 		description:
-			'Flowchart (`flowchart`/`graph`)',
+			'Flowchart',
 		definitions: {
 			'flowchart-pointEnd':
 				'<marker id="flowchart-pointEnd" class="marker flowchart" viewBox="0 0 10 10" refX="10" refY="5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></path></marker>',
@@ -53,7 +53,7 @@ export const MERMAID_DATA: {[key in DiagramType]: DiagramData} = {
 	},
 	sequenceDiagram: {
 		description:
-			'Sequence diagrams (`sequenceDiagram`)',
+			'Sequence diagrams',
 		definitions: {
 			'computer':
 				'<symbol id="computer" width="24" height="24"><path transform="scale(.5)" d="M2 2v13h20v-13h-20zm18 11h-16v-9h16v9zm-10.228 6l.466-1h3.524l.467 1h-4.457zm14.228 3h-24l2-6h2.104l-1.33 4h18.45l-1.297-4h2.073l2 6zm-5-10h-14v-7h14v7z"></path></symbol>',
@@ -73,7 +73,7 @@ export const MERMAID_DATA: {[key in DiagramType]: DiagramData} = {
 	},
 	classDiagram: {
 		description:
-			'Class diagrams (`classDiagram`)',
+			'Class diagrams',
 		definitions: {
 			'classDiagram-aggregationStart':
 				'<marker id="classDiagram-aggregationStart" class="marker aggregation classDiagram" refX="0" refY="7" markerWidth="190" markerHeight="240" orient="auto"><path d="M 18,7 L9,13 L1,7 L9,1 Z"></path></marker>',
@@ -97,7 +97,7 @@ export const MERMAID_DATA: {[key in DiagramType]: DiagramData} = {
 	},
 	stateDiagram: {
 		description:
-			'State diagrams (`stateDiagram`)',
+			'State diagrams',
 		definitions: {
 			'statediagram-barbEnd':
 				'<marker id="statediagram-barbEnd" refX="19" refY="7" markerWidth="20" markerHeight="14" markerUnits="strokeWidth" orient="auto"><path d="M 19,7 L9,13 L14,7 L9,1 Z"></path></marker>',
@@ -105,7 +105,7 @@ export const MERMAID_DATA: {[key in DiagramType]: DiagramData} = {
 	},
 	erDiagram: {
 		description:
-			'Entity Relationship Diagram (`erDiagram`)',
+			'Entity Relationship Diagram',
 		definitions: {
 			'ONLY_ONE_START':
 				'<marker id="ONLY_ONE_START" refX="0" refY="9" markerWidth="18" markerHeight="18" orient="auto"><path stroke="gray" fill="none" d="M9,0 L9,18 M15,0 L15,18"></path></marker>',
@@ -127,7 +127,7 @@ export const MERMAID_DATA: {[key in DiagramType]: DiagramData} = {
 	},
 	journey: {
 		description:
-			'User journey (`journey`)',
+			'User journey',
 		definitions: {
 			'arrowhead':
 				'<marker id="arrowhead" refX="5" refY="2" markerWidth="6" markerHeight="4" orient="auto"><path d="M 0,0 V 4 L6,2 Z"></path></marker>',
@@ -135,17 +135,17 @@ export const MERMAID_DATA: {[key in DiagramType]: DiagramData} = {
 	},
 	gantt: {
 		description:
-			'Gantt charts (`gantt`)',
+			'Gantt charts',
 		definitions: {},
 	},
 	pie: {
 		description:
-			'Pie charts (`pie`)',
+			'Pie charts',
 		definitions: {},
 	},
 	requirementDiagram: {
 		description:
-			'Requirement diagrams (`requirementDiagram`)',
+			'Requirement diagrams',
 		definitions: {
 			'contains_line_ending':
 				'<marker id="contains_line_ending" refX="0" refY="10" markerWidth="20" markerHeight="20" orient="auto"><g><circle cx="10" cy="10" r="10" fill="none"></circle><line x1="0" x2="20" y1="10" y2="10" stroke-width="1"></line><line y1="0" y2="20" x1="10" x2="10" stroke-width="1"></line></g></marker>',
@@ -155,12 +155,12 @@ export const MERMAID_DATA: {[key in DiagramType]: DiagramData} = {
 	},
 	gitGraph: {
 		description:
-			'Gitgraph diagrams (`gitGraph`)',
+			'Gitgraph diagrams',
 		definitions: {},
 	},
 	C4Context: {
 		description:
-			'C4C Context diagrams (`C4Context`)',
+			'C4C Context diagrams',
 		definitions: {
 			'computer':
 				'<symbol id="computer" width="24" height="24"><path transform="scale(.5)" d="M2 2v13h20v-13h-20zm18 11h-16v-9h16v9zm-10.228 6l.466-1h3.524l.467 1h-4.457zm14.228 3h-24l2-6h2.104l-1.33 4h18.45l-1.297-4h2.073l2 6zm-5-10h-14v-7h14v7z"></path></symbol>',

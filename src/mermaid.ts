@@ -10,4 +10,16 @@ export abstract class Mermaid {
 		return MERMAID_DATA[ diagramType ].definitions;
 	}
 
+	static getMapForDiagramTypes<T>( defaultValue: T ): { [ key in DiagramType ]: T } {
+		const map: Partial<{ [ key in DiagramType ]: T }> = {};
+		let diagramType: DiagramType;
+		for ( diagramType in MERMAID_DATA ) {
+			map[ diagramType ] = defaultValue;
+		}
+		return map as { [ key in DiagramType ]: T };
+	}
+
+	static getDiagramTypeDescription( diagramType: DiagramType ): string {
+		return MERMAID_DATA[ diagramType ].description;
+	}
 }

@@ -23,31 +23,15 @@ export class MermaidDefinitions {
 		}
 	}
 
-	public getSVGDefinitions( defsID?: string ): SVGContent {
+	public getSVGDefinitions(): SVGContent {
 		let definitions: SVGContent = '';
 		for ( const markerID in this.markersByIDThenDiagramType ) {
 			const markerDefinitions = Object.values( this.markersByIDThenDiagramType[ markerID ] );
 			const firstMarkerDefinition = markerDefinitions[ 0 ];
 			definitions += firstMarkerDefinition;
 		}
-		const id = ( defsID ) ? ` id="${ defsID }"` : '';
-		return `<defs${ id }>${ definitions }</defs>`;
+		return definitions;
 	}
-
-	// public getConflicts(): MermaidDefinitionConflict[] {
-	// 	const conflicts: MermaidDefinitionConflict[] = [];
-	// 	for ( const id in this.markersByIDThenDiagramType ) {
-	// 		if ( !this.hasConflict( id ) ) continue;
-	// 		const 
-
-	// 			conflicts.push( new MermaidDefinitionConflict( id, this.markersByIDThenDiagramType[ id ] ) );
-	// 	}
-	// 	return conflicts;
-	// }
-
-	// private hasConflict( markerID: MarkerID ): boolean {
-	// 	return  Object.keys( this.markersByIDThenDiagramType[ markerID ] ).length > 1
-	// }
 
 }
 
