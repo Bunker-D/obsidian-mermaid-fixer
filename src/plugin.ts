@@ -11,14 +11,17 @@ import { MermaidArrowSaverSettingTab } from './settingsTab';
 
 interface MermaidArrowSaverSettings {
 	selectedDiagramTypes: DiagramType[];
+	emptyButton: boolean;
 };
 
 const DEFAULT_SETTINGS: MermaidArrowSaverSettings = {
 	selectedDiagramTypes: [ 'flowchart', 'classDiagram' ], //HACK better default settings
+	emptyButton: false,
 };
 
 const DEV_MODE = true as const;
-const DEFS_ID = 'mermaid-defs-saver' as const;
+const BUTTON_DEFS_ID = 'mermaid-defs-saver' as const;
+const BUTTON_PATH_ID = 'mermaid-defs-saver-path' as const;
 
 export default class MermaidArrowSaver extends Plugin {
 	settings: MermaidArrowSaverSettings;
@@ -29,28 +32,62 @@ export default class MermaidArrowSaver extends Plugin {
 		this.addSettingTab( new MermaidArrowSaverSettingTab( this.app, this ) );
 	}
 
-	private async loadSettings() {
+	getEmptyButtonSetting(): boolean {
+		return this.settings.emptyButton;
+	}
+	async setEmptyButtonSetting( emptyButton: boolean ) {
+		console.log( this );
+		this.settings.emptyButton = emptyButton;
+		this.applyEmptyButtonSetting();
+		this.saveSettings();
+	}
+
+	async loadSettings() {
 		this.settings = { ...DEFAULT_SETTINGS, ...( await this.loadData() ) };
 	}
 
-	private addButtonForDiagramTypes( diagramTypes: DiagramType[] ) {
-		const definitions = new MermaidDefinitions( diagramTypes );
-		const defSVG = definitions.getSVGDefinitions( DEFS_ID );
-		addIcon( DEFS_ID, defSVG + BUTTON_ICON );
-		const onButtonClick = ( DEV_MODE ) ? this._devOnButtonClick : this.onButtonClick;
-		this.addRibbonIcon( DEFS_ID, 'Mermaid Arrow Saver', onButtonClick );
+	async saveSettings() {
+		console.log( 'SAVE SETTINGS:' );  //HACK
+		console.log( this.settings );     //HACK
+		// await this.saveData( this.settings );
 	}
 
-	private onButtonClick( evt: MouseEvent ) {
+	addButtonForDiagramTypes( diagramTypes: DiagramType[] ) {
+		const definitions = new MermaidDefinitions( diagramTypes );
+		const defSVG = definitions.getSVGDefinitions( BUTTON_DEFS_ID );
+		const buttonIcon = `<g id="${ BUTTON_PATH_ID }">${ ( this.settings.emptyButton ) ? '' : BUTTON_ICON }</g>`;
+		addIcon( 'mermaid-arrow-saver', defSVG + buttonIcon );
+		this.addRibbonIcon( 'mermaid-arrow-saver', 'Mermaid Arrow Saver', this.createButtonFunction() );
+	}
+
+	private createButtonFunction(): ( e: MouseEvent ) => void {
+		if ( DEV_MODE ) {
+			return ( e ) => { this.onDevButtonClick(); };
+		}
+		return ( e ) => { this.onButtonClick(); };
+	}
+
+	private onButtonClick() {
 		new Notice( 'This button keep Mermaid arrows visible.\nClicking it does nothing.' );
 	}
 
-	private _devOnButtonClick() {
-		MermaidArrowSaver._toggleDefIDs();
+	private onDevButtonClick() {
+		console.log( this );
+		this.toggleDefIDs();
 	}
 
-	private static _toggleDefIDs() {
-		const defs = document.getElementById( DEFS_ID );
+	applyEmptyButtonSetting() {
+		const buttonPath = document.getElementById( BUTTON_PATH_ID );
+		if ( !buttonPath ) return;
+		if ( this.settings.emptyButton ) {
+			buttonPath.innerHTML = '';
+		} else {
+			buttonPath.innerHTML = BUTTON_ICON;
+		}
+	}
+
+	toggleDefIDs() {
+		const defs = document.getElementById( BUTTON_DEFS_ID );
 		if ( !defs || !defs.firstElementChild ) return;
 		const firstID = defs.firstElementChild.id;
 		const idsAreInactive = firstID.startsWith( '---' );
