@@ -1,56 +1,53 @@
-
-import { SVGContent } from "src/base_types";
-import { DiagramType, MERMAID_DEFINITIONS_BY_CHART_TYPE } from "src/mermaid_data";
+import { Mermaid, DiagramType, SVGContent, MarkerID, MarkersByDiagramType, MarkersByID } from './mermaid';
 
 export class MermaidDefinitions {
 
-	private markersByIDThenDiagramType: { [ key: string ]: { [ key in DiagramType ]?: SVGContent }; };
+	private markersByIDThenDiagramType: { [ key: MarkerID ]: MarkersByDiagramType; };
 
 	constructor( diagramTypesList: DiagramType[] ) {
-		this.initMarkersByIDThenDiagramType( diagramTypesList );
-	}
-
-	public getDefinitions(): SVGContent {
-		const definitions: SVGContent =
-			Object.values( this.markersByIDThenDiagramType )
-				.map( ( defsByDiagramType ) => Object.values( defsByDiagramType )[ 0 ] )
-				.join( '' );
-		return `<defs>${ definitions }</defs>`;
-	}
-
-	public getConflicts(): MermaidDefinitionConflict[] {
-		const conflicts :MermaidDefinitionConflict[]= [];
-		for ( const id in this.markersByIDThenDiagramType ) {
-			if ( Object.keys( this.markersByIDThenDiagramType[ id ] ).length > 1 ) {
-				conflicts.push( new MermaidDefinitionConflict( id, this.markersByIDThenDiagramType[ id ] ) );
-			}
-		}
-		return conflicts;
-	}
-
-	private initMarkersByIDThenDiagramType( diagramTypesList: DiagramType[] ) {
-		this.markersByIDThenDiagramType = {};
+		this.flush();
 		for ( const diagramType of diagramTypesList ) {
-			const diagramMarkers = MERMAID_DEFINITIONS_BY_CHART_TYPE[ diagramType ];
-			for ( const id in diagramMarkers ) {
-				if ( !( id in this.markersByIDThenDiagramType ) ) {
-					this.markersByIDThenDiagramType[ id ] = {};
-				}
-				this.markersByIDThenDiagramType[ id ][ diagramType ] = diagramMarkers[ id ];
-			}
+			this.addDiagramType( diagramType );
 		}
 	}
 
-}
-
-class MermaidDefinitionConflict { //TODO if nothing more, make it an interface
-
-	private id: ID;
-	private markersByChartType: { [ key in DiagramType ]?: SVGContent };
-
-	constructor( id: ID, markersByChartType: { [ key in DiagramType ]?: SVGContent } ) {
-		this.id = id;
-		this.markersByChartType = markersByChartType;
+	private flush() {
+		this.markersByIDThenDiagramType = {};
 	}
 
+	private addDiagramType( diagramType: DiagramType ) {
+		const diagramMarkers = Mermaid.getMarkersForDiagramType( diagramType );
+		for ( const markerID in diagramMarkers ) {
+			this.markersByIDThenDiagramType[ markerID ] ??= {};
+			this.markersByIDThenDiagramType[ markerID ][ diagramType ] = diagramMarkers[ markerID ];
+		}
+	}
+
+	public getSVGDefinitions( defsID?: string ): SVGContent {
+		let definitions: SVGContent = '';
+		for ( const markerID in this.markersByIDThenDiagramType ) {
+			const markerDefinitions = Object.values( this.markersByIDThenDiagramType[ markerID ] );
+			const firstMarkerDefinition = markerDefinitions[ 0 ];
+			definitions += firstMarkerDefinition;
+		}
+		const id = ( defsID ) ? ` id="${ defsID }"` : '';
+		return `<defs${ id }>${ definitions }</defs>`;
+	}
+
+	// public getConflicts(): MermaidDefinitionConflict[] {
+	// 	const conflicts: MermaidDefinitionConflict[] = [];
+	// 	for ( const id in this.markersByIDThenDiagramType ) {
+	// 		if ( !this.hasConflict( id ) ) continue;
+	// 		const 
+
+	// 			conflicts.push( new MermaidDefinitionConflict( id, this.markersByIDThenDiagramType[ id ] ) );
+	// 	}
+	// 	return conflicts;
+	// }
+
+	// private hasConflict( markerID: MarkerID ): boolean {
+	// 	return  Object.keys( this.markersByIDThenDiagramType[ markerID ] ).length > 1
+	// }
+
 }
+
