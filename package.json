@@ -4,8 +4,12 @@
 	"description": "This is a sample plugin for Obsidian (https://obsidian.md)",
 	"main": "main.js",
 	"scripts": {
-		"dev": "node esbuild.config.mjs",
-		"build": "tsc -noEmit -skipLibCheck && node esbuild.config.mjs production",
+		"watch": "npm-run-all --parallel watch:*",
+		"build": "npm-run-all --parallel build:*",
+		"watch:sass": "sass --no-source-map --watch src:.",
+		"build:sass": "sass --no-source-map --style=compressed src:.",
+		"watch:ts": "node esbuild.config.mjs",
+		"build:ts": "tsc -noEmit -skipLibCheck && node esbuild.config.mjs production",
 		"version": "node version-bump.mjs && git add manifest.json versions.json"
 	},
 	"keywords": [],
@@ -17,7 +21,9 @@
 		"@typescript-eslint/parser": "5.29.0",
 		"builtin-modules": "3.3.0",
 		"esbuild": "0.17.3",
+		"npm-run-all": "^4.1.5",
 		"obsidian": "latest",
+		"sass": "^1.63.3",
 		"tslib": "2.4.0",
 		"typescript": "4.7.4"
 	}
