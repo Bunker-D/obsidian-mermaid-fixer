@@ -32,7 +32,7 @@ export type MarkerID = string;
 type MarkerMap = { [ key: MarkerID ]: SVGContent; };
 type DiagramData = { description: string, definitions: MarkerMap; };
 
-export const MERMAID_DATA: {[key in DiagramType]: DiagramData} = {
+export const MERMAID_DATA: { [ key in DiagramType ]: DiagramData } = {
 	flowchart: {
 		description:
 			'Flowchart',

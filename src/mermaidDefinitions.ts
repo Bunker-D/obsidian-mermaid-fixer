@@ -1,5 +1,7 @@
 import { Mermaid, DiagramType, SVGContent, MarkerID, MarkersByDiagramType, MarkersByID } from './mermaid';
 
+export type Conflict = { markerID: MarkerID, diagramTypes: DiagramType[]; };
+
 export class MermaidDefinitions {
 
 	private markersByIDThenDiagramType: { [ key: MarkerID ]: MarkersByDiagramType; };
@@ -33,5 +35,20 @@ export class MermaidDefinitions {
 		return definitions;
 	}
 
+	getConflicts(): Conflict[] {
+		const conflicts: Conflict[] = [];
+		for ( const markerID in this.markersByIDThenDiagramType ) {
+			if ( !this.hasConflictForID( markerID ) ) continue;
+			const diagramTypes = Object.keys( this.markersByIDThenDiagramType[ markerID ] ) as DiagramType[];
+			conflicts.push( { markerID, diagramTypes } );
+		}
+		console.log( `CONFLICTS:` );
+		console.table( conflicts );
+		return conflicts;
+	}
+
+	private hasConflictForID( markerID: MarkerID ): boolean {
+		return Object.keys( this.markersByIDThenDiagramType[ markerID ] ).length > 1;
+	}
 }
 

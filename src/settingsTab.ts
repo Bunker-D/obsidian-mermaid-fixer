@@ -1,12 +1,13 @@
-import { App, PluginSettingTab, Setting } from 'obsidian';
+import { App, ColorComponent, PluginSettingTab, Setting } from 'obsidian';
 import MermaidArrowSaver from './plugin';
 import { DiagramType, Mermaid } from './mermaid';
+import { Conflict } from './mermaidDefinitions';
 
 export class MermaidArrowSaverSettingTab extends PluginSettingTab {
-	plugin: MermaidArrowSaver;
-	diagramTypesSelection: { [ key in DiagramType ]: boolean; };
-	conflictsSection: HTMLElement;
-	conflictsListEl: HTMLElement;
+	private plugin: MermaidArrowSaver;
+	private diagramTypesSelection: { [ key in DiagramType ]: boolean; };
+	private conflictsSection: HTMLElement;
+	private conflictsListEl: HTMLElement;
 
 	constructor( app: App, plugin: MermaidArrowSaver ) {
 		super( app, plugin );
@@ -17,7 +18,6 @@ export class MermaidArrowSaverSettingTab extends PluginSettingTab {
 		this.containerEl.empty();
 		this.buildButtonVisibilityToggle();
 		this.buildDiagramTypesSettings();
-		//TODO conflict info
 	}
 
 	private buildButtonVisibilityToggle(): void {
@@ -77,6 +77,7 @@ export class MermaidArrowSaverSettingTab extends PluginSettingTab {
 			}
 		}
 		this.plugin.setSelectedDiagramTypes( selectedDiagramTypes );
+		this.updateConflicts();
 	}
 
 	private buildEmptyConflictSection(): void {
@@ -88,30 +89,30 @@ export class MermaidArrowSaverSettingTab extends PluginSettingTab {
 	}
 
 	private updateConflicts(): void {
-		//TODO build conflicts from this.diagramTypesSelection
-		
-		const conflicts: { diagramTypes: DiagramType[], markerID: string; }[] = [ // HACK
-			{
-				diagramTypes: [ 'flowchart', 'classDiagram' ],
-				markerID: 'flow-class',
-			},
-			{
-				diagramTypes: [ 'flowchart', 'classDiagram', 'erDiagram' ],
-				markerID: 'flow-class-relationship',
-			},
-		];
-		for ( const conflict in conflicts ) {
+		const conflictsList: Conflict[] = this.plugin.getConflicts();
+		this.flushConflicts();
+		for ( const conflict of conflictsList ) {
 			this.addConflict( conflict );
 		}
 	}
 
 	private flushConflicts(): void {
-		this.conflictsListEl.empty(); 
+		this.conflictsListEl.empty();
 	}
 
-	private addConflict( conflict: any /*TODO*/ ): void {
-		this.conflictsListEl.createEl( 'li', 'conflict' ); //HACK
-		// TODO
+	private addConflict( conflict: Conflict ): void {
+		console.log( conflict);
+		const { diagramTypes, markerID } = conflict;
+		this.conflictsListEl.createEl( 'li', undefined, ( li ) => {
+			for ( let i = 0; i < diagramTypes.length; i++ ) {
+				if ( i ) {
+					li.appendText( ( i === diagramTypes.length - 1 ) ? ' and ' : ', ' );
+				}
+				li.createEl( 'strong', { text: Mermaid.getDiagramTypeDescription( diagramTypes[ i ] ) } );
+			}
+			li.appendText( ' define different markers for ID ' );
+			li.createEl( 'code', { text: markerID } );
+		} );
 	}
 	/* Target conflict section:
 		<div class="mermaid-arrow-saver-warning" data-callout="warning">
