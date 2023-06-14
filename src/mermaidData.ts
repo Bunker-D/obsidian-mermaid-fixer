@@ -38,17 +38,17 @@ export const MERMAID_DATA: { [ key in DiagramType ]: DiagramData } = {
 			'Flowcharts',
 		definitions: {
 			'flowchart-pointEnd':
-				'<marker id="flowchart-pointEnd" class="marker flowchart" stroke="var(--text-normal)" fill="var(--text-normal)" viewBox="0 0 10 10" refX="10" refY="5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></path></marker>',
+				'<marker id="flowchart-pointEnd" stroke="var(--text-normal)" fill="var(--text-normal)" class="marker flowchart" viewBox="0 0 10 10" refX="10" refY="5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></path></marker>',
 			'flowchart-pointStart':
-				'<marker id="flowchart-pointStart" class="marker flowchart" stroke="var(--text-normal)" fill="var(--text-normal)" viewBox="0 0 10 10" refX="0" refY="5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto"><path d="M 0 5 L 10 10 L 10 0 z" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></path></marker>',
+				'<marker id="flowchart-pointStart" stroke="var(--text-normal)" fill="var(--text-normal)" class="marker flowchart" viewBox="0 0 10 10" refX="0" refY="5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto"><path d="M 0 5 L 10 10 L 10 0 z" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></path></marker>',
 			'flowchart-circleEnd':
-				'<marker id="flowchart-circleEnd" class="marker flowchart" stroke="var(--text-normal)" fill="var(--text-normal)" viewBox="0 0 10 10" refX="11" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></circle></marker>',
+				'<marker id="flowchart-circleEnd" stroke="var(--text-normal)" fill="var(--text-normal)" class="marker flowchart" viewBox="0 0 10 10" refX="11" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></circle></marker>',
 			'flowchart-circleStart':
-				'<marker id="flowchart-circleStart" class="marker flowchart" stroke="var(--text-normal)" fill="var(--text-normal)" viewBox="0 0 10 10" refX="-1" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></circle></marker>',
+				'<marker id="flowchart-circleStart" stroke="var(--text-normal)" fill="var(--text-normal)" class="marker flowchart" viewBox="0 0 10 10" refX="-1" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></circle></marker>',
 			'flowchart-crossEnd':
-				'<marker id="flowchart-crossEnd" class="marker cross flowchart" stroke="var(--text-normal)" fill="var(--text-normal)" viewBox="0 0 11 11" refX="12" refY="5.2" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M 1,1 l 9,9 M 10,1 l -9,9" class="arrowMarkerPath" style="stroke-width: 2; stroke-dasharray: 1, 0;"></path></marker>',
+				'<marker id="flowchart-crossEnd" stroke="var(--text-normal)" fill="var(--text-normal)" class="marker cross flowchart" viewBox="0 0 11 11" refX="12" refY="5.2" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M 1,1 l 9,9 M 10,1 l -9,9" class="arrowMarkerPath" style="stroke-width: 2; stroke-dasharray: 1, 0;"></path></marker>',
 			'flowchart-crossStart':
-				'<marker id="flowchart-crossStart" class="marker cross flowchart" stroke="var(--text-normal)" fill="var(--text-normal)" viewBox="0 0 11 11" refX="-1" refY="5.2" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M 1,1 l 9,9 M 10,1 l -9,9" class="arrowMarkerPath" style="stroke-width: 2; stroke-dasharray: 1, 0;"></path></marker>',
+				'<marker id="flowchart-crossStart" stroke="var(--text-normal)" fill="var(--text-normal)" class="marker cross flowchart" viewBox="0 0 11 11" refX="-1" refY="5.2" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M 1,1 l 9,9 M 10,1 l -9,9" class="arrowMarkerPath" style="stroke-width: 2; stroke-dasharray: 1, 0;"></path></marker>',
 		},
 	},
 	sequenceDiagram: {
@@ -56,13 +56,13 @@ export const MERMAID_DATA: { [ key in DiagramType ]: DiagramData } = {
 			'Sequence diagrams',
 		definitions: {
 			'arrowhead':
-				'<marker id="arrowhead" refX="9" refY="5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z"></path></marker>',
+				'<marker id="arrowhead" stroke="var(--text-normal)" stroke-width="1px" fill="var(--text-normal)" refX="9" refY="5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z"></path></marker>',
 			'crosshead':
-				'<marker id="crosshead" markerWidth="15" markerHeight="8" orient="auto" refX="4" refY="5"><path fill="none" stroke="#000000" stroke-width="1pt" d="M 1,2 L 6,7 M 6,2 L 1,7" style="stroke-dasharray: 0, 0;"></path></marker>',
+				'<marker id="crosshead" stroke="var(--text-normal)" markerWidth="15" markerHeight="8" orient="auto" refX="4" refY="5"><path stroke-width="1pt" d="M 1,2 L 6,7 M 6,2 L 1,7" style="stroke-dasharray: 0, 0;"></path></marker>',
 			'filled-head':
-				'<marker id="filled-head" refX="18" refY="7" markerWidth="20" markerHeight="28" orient="auto"><path d="M 18,7 L9,13 L14,7 L9,1 Z"></path></marker>',
+				'<marker id="filled-head" stroke="none" fill="var(--text-normal)" refX="18" refY="7" markerWidth="20" markerHeight="28" orient="auto"><path d="M 18,7 L9,13 L14,7 L9,1 Z"></path></marker>',
 			'sequencenumber':
-				'<marker id="sequencenumber" refX="15" refY="15" markerWidth="60" markerHeight="40" orient="auto"><circle cx="15" cy="15" r="6"></circle></marker>',
+				'<marker id="sequencenumber" fill="var(--text-normal)" refX="15" refY="15" markerWidth="60" markerHeight="40" orient="auto"><circle cx="15" cy="15" r="6"></circle></marker>',
 		},
 	},
 	classDiagram: {
