@@ -42,8 +42,6 @@ export class MermaidDefinitions {
 			const diagramTypes = Object.keys( this.markersByIDThenDiagramType[ markerID ] ) as DiagramType[];
 			conflicts.push( { markerID, diagramTypes } );
 		}
-		console.log( `CONFLICTS:` );
-		console.table( conflicts );
 		return conflicts;
 	}
 

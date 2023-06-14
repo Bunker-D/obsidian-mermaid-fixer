@@ -3,28 +3,22 @@ import { DiagramType } from './mermaid';
 import { Conflict, MermaidDefinitions } from './mermaidDefinitions';
 import { BUTTON_ICON } from './icons'; import { MermaidArrowSaverSettingTab } from './settingsTab';
 
-
-//TODO button in non-dev mode opens the settings
-//IMPROVE Alternative option: select the chart types dynamically based on active tab?
-
 interface MermaidArrowSaverSettings {
 	selectedDiagramTypes: DiagramType[];
 	visibleButton: boolean;
 };
 
 const DEFAULT_SETTINGS: MermaidArrowSaverSettings = {
-	selectedDiagramTypes: [ 
+	selectedDiagramTypes: [
 		'flowchart',
 		'sequenceDiagram',
 		'classDiagram',
 		'stateDiagram',
 		'erDiagram',
-		'journey', //HACK should be excluded by default
 		'gantt',
 		'pie',
 		'requirementDiagram',
 		'gitGraph',
-		'C4Context', //HACK should be excluded by default
 	],
 	visibleButton: true,
 };
@@ -78,8 +72,7 @@ export default class MermaidArrowSaver extends Plugin {
 	}
 
 	private async saveSettings() {
-		console.log( 'SAVE SETTINGS:' );  //HACK
-		console.log( this.settings );     //HACK
+		console.log( 'SAVE SETTINGS:' ); console.log( this.settings ); //HACK 🚫 Saving setting
 		// await this.saveData( this.settings );
 	}
 
@@ -98,11 +91,10 @@ export default class MermaidArrowSaver extends Plugin {
 	}
 
 	private onButtonClick(): void {
-		new Notice( 'This button keep Mermaid arrows visible.\nClicking it does nothing.' );
-		//TODO Or have button open the options?
+		new Notice( 'This button keeps Mermaid arrows visible.\nClicking it does nothing.' );
 	}
 
-	private onDevButtonClick(): void {
+	private onDevButtonClick(): void { //HACK Remove dev mode?
 		console.log( this );
 		this.toggleDefIDs();
 	}

@@ -28,13 +28,7 @@ export class MermaidArrowSaverSettingTab extends PluginSettingTab {
 	private buildButtonVisibilityToggle(): void {
 		new Setting( this.containerEl )
 			.setName( 'Visible button' )
-			.setDesc(
-				createFragment( ( el ) => {
-					el.appendText( 'Make the plugin button more discrete by making it empty.' );
-					el.createEl( 'br' );
-					el.appendText( '(The plugin relies on this button, but clicking it does nothing.)' );
-				} ),
-			)
+			.setDesc( 'The button is needed, but does nothing.' )
 			.addToggle( ( toggle ) => {
 				toggle.setValue( this.plugin.getButtonVisibility() );
 				toggle.onChange( ( value ) => { this.plugin.setButtonVisibility( value ); } );
@@ -123,7 +117,6 @@ export class MermaidArrowSaverSettingTab extends PluginSettingTab {
 	}
 
 	private addConflict( conflict: Conflict ): void {
-		console.log( conflict );
 		const { diagramTypes, markerID } = conflict;
 		this.conflictsListEl.createEl( 'li', undefined, ( li ) => {
 			for ( let i = 0; i < diagramTypes.length; i++ ) {
