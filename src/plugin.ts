@@ -23,7 +23,6 @@ const DEFAULT_SETTINGS: MermaidArrowSaverSettings = {
 	visibleButton: true,
 };
 
-const DEV_MODE = true as const;
 const BUTTON_DEFS_ID = 'mermaid-defs-saver' as const;
 const BUTTON_PATH_ID = 'mermaid-defs-saver-path' as const;
 
@@ -83,19 +82,10 @@ export default class MermaidArrowSaver extends Plugin {
 	}
 
 	private createButtonFunction(): ( e: MouseEvent ) => void {
-		if ( DEV_MODE ) {
-			return ( e ) => { this.onDevButtonClick(); };
-		}
-		return ( e ) => { this.onButtonClick(); };
-	}
-
-	private onButtonClick(): void {
-		new Notice( 'This button keeps Mermaid arrows visible.\nClicking it does nothing.' );
-	}
-
-	private onDevButtonClick(): void { //HACK Remove dev mode?
-		console.log( this );
-		this.toggleDefIDs();
+		return ( e ) => {
+			new Notice( 'This button keeps Mermaid arrows visible.\nClicking it does nothing.' );
+			this.toggleDefIDs(); //HACK Uncomment when updating the Mermaid markers, to toggle their effects by clicking the button.
+		};			
 	}
 
 	private applyButtonVisibility(): void {
@@ -114,7 +104,7 @@ export default class MermaidArrowSaver extends Plugin {
 		definitionsEl.innerHTML = this.mermaidDefinitions.getSVGDefinitions();
 	}
 
-	private toggleDefIDs() {
+	private toggleDefIDs():void {
 		const defs = document.getElementById( BUTTON_DEFS_ID );
 		if ( !defs || !defs.firstElementChild ) return;
 		const firstID = defs.firstElementChild.id;
@@ -126,6 +116,11 @@ export default class MermaidArrowSaver extends Plugin {
 		for ( const marker of defs.children ) {
 			marker.id = modID( marker.id );
 		}
+		console.log(
+			( idsAreInactive )
+			? '🧜‍♀️🔱 ACTIVATED Mermaid Arrow Saver'
+			: '🧜‍♀️🚫 DEACTIVATED Mermaid Arrow Saver'
+		);
 	}
 
 }
