@@ -83,9 +83,9 @@ export default class MermaidArrowSaver extends Plugin {
 
 	private createButtonFunction(): ( e: MouseEvent ) => void {
 		return ( e ) => {
-			new Notice( 'This button keeps Mermaid arrows visible.\nClicking it does nothing.' );
+			// new Notice( 'This button keeps Mermaid arrows visible.\nClicking it does nothing.' ); //HACK
 			this.toggleDefIDs(); //HACK Uncomment when updating the Mermaid markers, to toggle their effects by clicking the button.
-		};			
+		};
 	}
 
 	private applyButtonVisibility(): void {
@@ -104,7 +104,7 @@ export default class MermaidArrowSaver extends Plugin {
 		definitionsEl.innerHTML = this.mermaidDefinitions.getSVGDefinitions();
 	}
 
-	private toggleDefIDs():void {
+	private toggleDefIDs(): void {
 		const defs = document.getElementById( BUTTON_DEFS_ID );
 		if ( !defs || !defs.firstElementChild ) return;
 		const firstID = defs.firstElementChild.id;
@@ -116,11 +116,9 @@ export default class MermaidArrowSaver extends Plugin {
 		for ( const marker of defs.children ) {
 			marker.id = modID( marker.id );
 		}
-		console.log(
-			( idsAreInactive )
-			? '🧜‍♀️🔱 ACTIVATED Mermaid Arrow Saver'
-			: '🧜‍♀️🚫 DEACTIVATED Mermaid Arrow Saver'
-		);
+		const message = ( idsAreInactive ) ? '🧜‍♀️🔱 ACTIVATED ✅' : '🧜‍♀️🚫 DEACTIVATED ❌';
+		new Notice( message );
+		console.log( message );
 	}
 
 }
