@@ -72,8 +72,7 @@ export default class MermaidArrowSaver extends Plugin {
 	}
 
 	private async saveSettings() {
-		console.log( 'SAVE SETTINGS:' ); console.log( this.settings ); //HACK 🚫 Saving setting
-		// await this.saveData( this.settings );
+		await this.saveData( this.settings );
 	}
 
 	private addButtonForDiagramTypes(): void {
