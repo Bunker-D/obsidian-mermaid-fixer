@@ -1,6 +1,7 @@
 # Keep Mermaid Arrows
 
 <!-- TODO Plugin presentation -->
+<!-- TODO Does it also correct styling issues due to the non-consideration of dark modes? -->
 
 ## How it works
 

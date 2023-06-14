@@ -46,7 +46,11 @@ export class MermaidDefinitions {
 	}
 
 	private hasConflictForID( markerID: MarkerID ): boolean {
-		return Object.keys( this.markersByIDThenDiagramType[ markerID ] ).length > 1;
+		const markersList: SVGContent[] = Object.values( this.markersByIDThenDiagramType[ markerID ] );
+		const ref = markersList.pop();
+		for ( const marker of markersList ) {
+			if ( marker !== ref ) return true;
+		}
+		return false;
 	}
 }
-
