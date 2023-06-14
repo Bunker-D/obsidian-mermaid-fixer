@@ -1,1 +1,45 @@
+.mermaid-arrow-saver-setting-callout {
+  background-color: var(--background-primary);
+  border: 2px solid rgba(var(--callout-warning), 0.3);
+  padding: 20px;
+  border-radius: 12px;
+}
+.mermaid-arrow-saver-setting-callout h3 {
+  font-size: medium;
+  color: rgb(var(--callout-warning));
+  line-height: 1.2;
+  margin: 0;
+}
+.mermaid-arrow-saver-setting-callout h3 svg {
+  display: inline-block;
+  vertical-align: top;
+  width: 1.4em;
+  margin-right: 0.6em;
+}
+.mermaid-arrow-saver-setting-callout ul {
+  margin: 1em 0 0 0;
+  padding: 0 0 0 2em;
+}
+.mermaid-arrow-saver-setting-callout li {
+  margin: 0.4em 0;
+  line-height: 1.6;
+}
+.mermaid-arrow-saver-setting-callout strong {
+  background-color: rgba(var(--callout-warning), 0.1);
+  border-radius: 0.3em;
+  padding: 0.1em 0.3em;
+  margin: 0 0.1em;
+  font-weight: var(--bold-weight);
+}
+.mermaid-arrow-saver-setting-callout code {
+  font-family: var(--font-monospace);
+  margin: 0 0.3em;
+}
 
+.mermaid-save-arrow-highlight {
+  border: 2px solid rgba(var(--callout-warning), 0.3);
+  padding: 0.2em 0.5em;
+  border-radius: 0.5em;
+  font-weight: var(--bold-weight);
+  margin-left: calc(-0.5em - 2px);
+}

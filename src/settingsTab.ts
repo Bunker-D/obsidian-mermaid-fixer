@@ -2,6 +2,11 @@ import { App, ColorComponent, PluginSettingTab, Setting } from 'obsidian';
 import MermaidArrowSaver from './plugin';
 import { DiagramType, Mermaid } from './mermaid';
 import { Conflict } from './mermaidDefinitions';
+import { WARNING_SVG } from './icons';
+
+const HIGHLIGHT_CLASS = 'mermaid-save-arrow-highlight' as const;
+const CALLOUT_CLASS = 'mermaid-arrow-saver-setting-callout' as const;
+const ID_PREFIX = 'mermaid-save-arrow-opt-' as const;
 
 export class MermaidArrowSaverSettingTab extends PluginSettingTab {
 	private plugin: MermaidArrowSaver;
@@ -58,7 +63,12 @@ export class MermaidArrowSaverSettingTab extends PluginSettingTab {
 
 	private buildDiagramTypeToggle( diagramType: DiagramType ): void {
 		new Setting( this.containerEl )
-			.setName( Mermaid.getDiagramTypeDescription( diagramType ) )
+			.setName( createFragment( ( el ) => {
+				el.createSpan( {
+					text: Mermaid.getDiagramTypeDescription( diagramType ),
+					cls: ID_PREFIX + diagramType
+				} );
+			} ) )
 			.addToggle( ( toggle ) => {
 				toggle.setValue( this.diagramTypesSelection[ diagramType ] );
 				toggle.onChange( ( value ) => {
@@ -81,10 +91,12 @@ export class MermaidArrowSaverSettingTab extends PluginSettingTab {
 	}
 
 	private buildEmptyConflictSection(): void {
-		this.conflictsSection = this.containerEl.createEl(
-			'div', { cls: 'callout mermaid-arrow-saver-setting-callout', attr: { 'data-callout': 'warning' } }
-		);
-		this.conflictsSection.createEl( 'h3', { text: 'Conflicts between selected diagram types:' } );
+		this.conflictsSection = this.containerEl.createDiv( {
+			cls: 'callout ' + CALLOUT_CLASS,
+			attr: { 'data-callout': 'warning' }
+		} );
+		this.conflictsSection.createEl( 'h3' )
+			.innerHTML = WARNING_SVG + ' "Conflicts between selected diagram types:"';
 		this.conflictsListEl = this.conflictsSection.createEl( 'ul' );
 	}
 
@@ -98,33 +110,40 @@ export class MermaidArrowSaverSettingTab extends PluginSettingTab {
 
 	private flushConflicts(): void {
 		this.conflictsListEl.empty();
+		this.flushHighlights();
+	}
+
+	private flushHighlights(): void {
+		const highlightedElems = [...this.containerEl.getElementsByClassName( HIGHLIGHT_CLASS )];
+		for ( const el of highlightedElems ) {
+			el.removeClass( HIGHLIGHT_CLASS );
+		}
 	}
 
 	private addConflict( conflict: Conflict ): void {
-		console.log( conflict);
+		console.log( conflict );
 		const { diagramTypes, markerID } = conflict;
 		this.conflictsListEl.createEl( 'li', undefined, ( li ) => {
 			for ( let i = 0; i < diagramTypes.length; i++ ) {
 				if ( i ) {
 					li.appendText( ( i === diagramTypes.length - 1 ) ? ' and ' : ', ' );
 				}
-				li.createEl( 'strong', { text: Mermaid.getDiagramTypeDescription( diagramTypes[ i ] ) } );
+				li.createEl( 'strong', {
+					text: Mermaid.getDiagramTypeDescription( diagramTypes[ i ] )
+				} );
 			}
 			li.appendText( ' define different markers for ID ' );
-			li.createEl( 'code', { text: markerID } );
+			li.createEl( 'code', { text: `"${ markerID }"` } );
+			li.appendText( '.' );
 		} );
+		for ( const diagType of diagramTypes ) {
+			this.addHighlight( diagType );
+		}
 	}
-	/* Target conflict section:
-		<div class="mermaid-arrow-saver-warning" data-callout="warning">
-			<h2>
-				<ObsidianIcon icon="alert-triangle" />" Conflicts between diagram types"
-			</h2>
-			<ul>
-				<li>
-					<strong>Flowcharts</strong>, <strong>Class diagrams</strong> and <strong>Entity relationship diagrams</strong>
-					defines differents for id <code>test-id</code>
-				</li>
-			</ul>
-	</div>
-	*/
+	private addHighlight( diagramType: DiagramType ): void {
+		const elems = [...this.containerEl.getElementsByClassName( ID_PREFIX + diagramType )];
+		for ( const el of elems ) {
+			el.addClass( HIGHLIGHT_CLASS );
+		}
+	}
 }

@@ -13,7 +13,19 @@ interface MermaidArrowSaverSettings {
 };
 
 const DEFAULT_SETTINGS: MermaidArrowSaverSettings = {
-	selectedDiagramTypes: [ 'flowchart', 'classDiagram' ], //HACK better default settings
+	selectedDiagramTypes: [ 
+		'flowchart',
+		'sequenceDiagram',
+		'classDiagram',
+		'stateDiagram',
+		'erDiagram',
+		'journey', //HACK should be excluded by default
+		'gantt',
+		'pie',
+		'requirementDiagram',
+		'gitGraph',
+		'C4Context', //HACK should be excluded by default
+	],
 	visibleButton: true,
 };
 
@@ -87,6 +99,7 @@ export default class MermaidArrowSaver extends Plugin {
 
 	private onButtonClick(): void {
 		new Notice( 'This button keep Mermaid arrows visible.\nClicking it does nothing.' );
+		//TODO Or have button open the options?
 	}
 
 	private onDevButtonClick(): void {
