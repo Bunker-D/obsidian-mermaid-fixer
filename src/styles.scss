@@ -1,10 +1,14 @@
-//TODO hide when empty
-
 .mermaid-arrow-saver-setting-callout {
 	background-color: var(--background-primary);
 	border: 2px solid rgba(var(--callout-warning), 0.3);
 	padding: 20px;
 	border-radius: 12px;
+
+	display: none;
+
+	&:has(li) {
+		display: block;
+	}
 
 	h3 {
 		font-size: medium;
@@ -29,14 +33,14 @@
 		margin: .4em 0;
 		line-height: 1.6;
 	}
-	
+
 	strong {
-	background-color: rgba(var(--callout-warning), 0.1);
-	border-radius: 0.3em;
-	padding: 0.1em 0.3em;
-	margin: 0 0.1em;
-	font-weight: var(--bold-weight);
-}
+		background-color: rgba(var(--callout-warning), 0.1);
+		border-radius: 0.3em;
+		padding: 0.1em 0.3em;
+		margin: 0 0.1em;
+		font-weight: var(--bold-weight);
+	}
 
 	code {
 		font-family: var(--font-monospace);

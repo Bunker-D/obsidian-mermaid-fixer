@@ -91,10 +91,12 @@ export class MermaidArrowSaverSettingTab extends PluginSettingTab {
 	}
 
 	private buildEmptyConflictSection(): void {
-		this.conflictsSection = this.containerEl.createDiv( {
-			cls: 'callout ' + CALLOUT_CLASS,
-			attr: { 'data-callout': 'warning' }
-		} );
+		this.conflictsSection =
+			this.containerEl
+				.createDiv( {
+					cls: 'callout ' + CALLOUT_CLASS,
+					attr: { 'data-callout': 'warning' }
+				} );
 		this.conflictsSection.createEl( 'h3' )
 			.innerHTML = WARNING_SVG + ' "Conflicts between selected diagram types:"';
 		this.conflictsListEl = this.conflictsSection.createEl( 'ul' );
@@ -114,7 +116,7 @@ export class MermaidArrowSaverSettingTab extends PluginSettingTab {
 	}
 
 	private flushHighlights(): void {
-		const highlightedElems = [...this.containerEl.getElementsByClassName( HIGHLIGHT_CLASS )];
+		const highlightedElems = [ ...this.containerEl.getElementsByClassName( HIGHLIGHT_CLASS ) ];
 		for ( const el of highlightedElems ) {
 			el.removeClass( HIGHLIGHT_CLASS );
 		}
@@ -141,7 +143,7 @@ export class MermaidArrowSaverSettingTab extends PluginSettingTab {
 		}
 	}
 	private addHighlight( diagramType: DiagramType ): void {
-		const elems = [...this.containerEl.getElementsByClassName( ID_PREFIX + diagramType )];
+		const elems = [ ...this.containerEl.getElementsByClassName( ID_PREFIX + diagramType ) ];
 		for ( const el of elems ) {
 			el.addClass( HIGHLIGHT_CLASS );
 		}
