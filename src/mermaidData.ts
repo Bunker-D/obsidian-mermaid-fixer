@@ -58,7 +58,7 @@ export const MERMAID_DATA: { [ key in DiagramType ]: DiagramData } = {
 			'Sequence diagrams',
 		definitions: {
 			'arrowhead':
-				'<marker id="arrowhead" stroke="var(--text-normal)" stroke-width="1px" fill="var(--text-normal)" refX="9" refY="5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z"></path></marker>',
+				'<marker id="arrowhead" stroke="var(--text-normal)" stroke-width="1" fill="var(--text-normal)" refX="9" refY="5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z"></path></marker>',
 			'crosshead':
 				'<marker id="crosshead" stroke="var(--text-normal)" markerWidth="15" markerHeight="8" orient="auto" refX="4" refY="5"><path stroke-width="1pt" d="M 1,2 L 6,7 M 6,2 L 1,7" style="stroke-dasharray: 0, 0;"></path></marker>',
 			'filled-head':
@@ -74,26 +74,28 @@ export const MERMAID_DATA: { [ key in DiagramType ]: DiagramData } = {
 			'Class diagrams',
 		definitions: { //TODO
 			'classDiagram-aggregationStart':
-				'<marker id="classDiagram-aggregationStart" class="marker aggregation classDiagram" refX="0" refY="7" markerWidth="190" markerHeight="240" orient="auto"><path d="M 18,7 L9,13 L1,7 L9,1 Z"></path></marker>',
+				'<marker id="classDiagram-aggregationStart" stroke="var(--text-normal)" stroke-width="1" fill="var(--background-primary)" class="marker aggregation classDiagram" refX="0" refY="7" markerWidth="190" markerHeight="240" orient="auto"><path d="M 18,7 L9,13 L1,7 L9,1 Z"></path></marker>',
 			'classDiagram-aggregationEnd':
-				'<marker id="classDiagram-aggregationEnd" class="marker aggregation classDiagram" refX="19" refY="7" markerWidth="20" markerHeight="28" orient="auto"><path d="M 18,7 L9,13 L1,7 L9,1 Z"></path></marker>',
+				'<marker id="classDiagram-aggregationEnd" stroke="var(--text-normal)" stroke-width="1" fill="var(--background-primary)" class="marker aggregation classDiagram" refX="19" refY="7" markerWidth="20" markerHeight="28" orient="auto"><path d="M 18,7 L9,13 L1,7 L9,1 Z"></path></marker>',
 			'classDiagram-extensionStart':
-				'<marker id="classDiagram-extensionStart" class="marker extension classDiagram" refX="0" refY="7" markerWidth="190" markerHeight="240" orient="auto"><path d="M 1,7 L18,13 V 1 Z"></path></marker>',
+				'<marker id="classDiagram-extensionStart" stroke="var(--text-normal)" stroke-width="1" fill="var(--background-primary)" class="marker extension classDiagram" refX="0" refY="7" markerWidth="190" markerHeight="240" orient="auto"><path d="M 1,7 L18,13 V 1 Z"></path></marker>',
 			'classDiagram-extensionEnd':
-				'<marker id="classDiagram-extensionEnd" class="marker extension classDiagram" refX="19" refY="7" markerWidth="20" markerHeight="28" orient="auto"><path d="M 1,1 V 13 L18,7 Z"></path></marker>',
+				'<marker id="classDiagram-extensionEnd" stroke="var(--text-normal)" stroke-width="1" fill="var(--background-primary)" class="marker extension classDiagram" refX="19" refY="7" markerWidth="20" markerHeight="28" orient="auto"><path d="M 1,1 V 13 L18,7 Z"></path></marker>',
 			'classDiagram-compositionStart':
-				'<marker id="classDiagram-compositionStart" class="marker composition classDiagram" refX="0" refY="7" markerWidth="190" markerHeight="240" orient="auto"><path d="M 18,7 L9,13 L1,7 L9,1 Z"></path></marker>',
+				'<marker id="classDiagram-compositionStart" stroke="var(--text-normal)" stroke-width="1" fill="var(--text-normal)" class="marker composition classDiagram" refX="0" refY="7" markerWidth="190" markerHeight="240" orient="auto"><path d="M 18,7 L9,13 L1,7 L9,1 Z"></path></marker>',
 			'classDiagram-compositionEnd':
-				'<marker id="classDiagram-compositionEnd" class="marker composition classDiagram" refX="19" refY="7" markerWidth="20" markerHeight="28" orient="auto"><path d="M 18,7 L9,13 L1,7 L9,1 Z"></path></marker>',
+				'<marker id="classDiagram-compositionEnd" stroke="var(--text-normal)" stroke-width="1" fill="var(--text-normal)" class="marker composition classDiagram" refX="19" refY="7" markerWidth="20" markerHeight="28" orient="auto"><path d="M 18,7 L9,13 L1,7 L9,1 Z"></path></marker>',
 			'classDiagram-dependencyStart':
-				'<marker id="classDiagram-dependencyStart" class="marker dependency classDiagram" refX="0" refY="7" markerWidth="190" markerHeight="240" orient="auto"><path d="M 5,7 L9,13 L1,7 L9,1 Z"></path></marker>',
+				'<marker id="classDiagram-dependencyStart" stroke="var(--text-normal)" stroke-width="1" fill="var(--text-normal)" class="marker dependency classDiagram" refX="0" refY="7" markerWidth="190" markerHeight="240" orient="auto"><path d="M 5,7 L9,13 L1,7 L9,1 Z"></path></marker>',
 			'classDiagram-dependencyEnd':
-				'<marker id="classDiagram-dependencyEnd" class="marker dependency classDiagram" refX="19" refY="7" markerWidth="20" markerHeight="28" orient="auto"><path d="M 18,7 L9,13 L14,7 L9,1 Z"></path></marker>',
+				'<marker id="classDiagram-dependencyEnd" stroke="var(--text-normal)" stroke-width="1" fill="var(--text-normal)" class="marker dependency classDiagram" refX="19" refY="7" markerWidth="20" markerHeight="28" orient="auto"><path d="M 18,7 L9,13 L14,7 L9,1 Z"></path></marker>',
 			'classDiagram-lollipopStart':
-				'<marker id="classDiagram-lollipopStart" class="marker lollipop classDiagram" refX="0" refY="7" markerWidth="190" markerHeight="240" orient="auto"><circle stroke="black" fill="white" cx="6" cy="7" r="6"></circle></marker>',
+				'<marker id="classDiagram-lollipopStart" stroke="var(--text-normal)" stroke-width="1" fill="var(--background-primary)" class="marker lollipop classDiagram" refX="0" refY="7" markerWidth="190" markerHeight="240" orient="auto"><circle stroke="black" fill="white" cx="6" cy="7" r="6"></circle></marker>',
 			'classDiagram-lollipopEnd':
-				'<marker id="classDiagram-lollipopEnd" class="marker lollipop classDiagram" refX="12" refY="7" markerWidth="190" markerHeight="240" orient="auto"><circle stroke="black" fill="white" cx="6" cy="7" r="6"></circle></marker>',
+				'<marker id="classDiagram-lollipopEnd" stroke="var(--text-normal)" stroke-width="1" fill="var(--background-primary)" class="marker lollipop classDiagram" refX="12" refY="7" markerWidth="190" markerHeight="240" orient="auto"><circle stroke="black" fill="white" cx="6" cy="7" r="6"></circle></marker>',
 		},
+		style:
+			'.mermaid [aria-roledescription="classDiagram"] .relation { stroke: var(--text-normal) !important; }',
 	},
 	stateDiagram: {
 		description:
@@ -128,7 +130,7 @@ export const MERMAID_DATA: { [ key in DiagramType ]: DiagramData } = {
 	journey: {
 		description:
 			'User journeys',
-		definitions: { //TODO
+		definitions: { //TODO could be identical to others with style correction?
 			'arrowhead':
 				'<marker id="arrowhead" refX="5" refY="2" markerWidth="6" markerHeight="4" orient="auto"><path d="M 0,0 V 4 L6,2 Z"></path></marker>',
 		},

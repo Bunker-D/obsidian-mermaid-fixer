@@ -25,7 +25,7 @@ export class MermaidDefinitions {
 			this.markersByIDThenDiagramType[ markerID ] ??= {};
 			this.markersByIDThenDiagramType[ markerID ][ diagramType ] = diagramMarkers[ markerID ];
 		}
-		this.styles[ diagramType ] = Mermaid.getDiagramTypeStyle( diagramType );
+		this.styles[ diagramType ] = Mermaid.getDiagramTypeStyle( diagramType ); 
 	}
 
 	getSVGDefinitions(): SVGContent {
@@ -39,12 +39,7 @@ export class MermaidDefinitions {
 	}
 
 	getStyles(): CSSContent {
-		let style = '';
-		let diagramType: DiagramType;
-		for ( diagramType in this.styles ) {
-			style += this.styles[ diagramType ];
-		}
-		return style;
+		return Object.values( this.styles ).join( '' );
 	}
 
 	getConflicts(): Conflict[] {
