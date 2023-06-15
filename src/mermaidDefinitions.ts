@@ -1,10 +1,11 @@
-import { Mermaid, DiagramType, SVGContent, MarkerID, MarkersByDiagramType, MarkersByID } from './mermaid';
+import { Mermaid, DiagramType, SVGContent, CSSContent, MarkerID, MarkersByDiagramType } from './mermaid';
 
 export type Conflict = { markerID: MarkerID, diagramTypes: DiagramType[]; };
 
 export class MermaidDefinitions {
 
 	private markersByIDThenDiagramType: { [ key: MarkerID ]: MarkersByDiagramType; };
+	private styles: { [ key in DiagramType ]?: CSSContent; };
 
 	constructor( diagramTypesList: DiagramType[] ) {
 		this.flush();
@@ -15,6 +16,7 @@ export class MermaidDefinitions {
 
 	private flush() {
 		this.markersByIDThenDiagramType = {};
+		this.styles = {};
 	}
 
 	private addDiagramType( diagramType: DiagramType ) {
@@ -23,6 +25,7 @@ export class MermaidDefinitions {
 			this.markersByIDThenDiagramType[ markerID ] ??= {};
 			this.markersByIDThenDiagramType[ markerID ][ diagramType ] = diagramMarkers[ markerID ];
 		}
+		this.styles[ diagramType ] = Mermaid.getDiagramTypeStyle( diagramType );
 	}
 
 	getSVGDefinitions(): SVGContent {
@@ -33,6 +36,15 @@ export class MermaidDefinitions {
 			definitions += firstMarkerDefinition;
 		}
 		return definitions;
+	}
+
+	getStyles(): CSSContent {
+		let style = '';
+		let diagramType: DiagramType;
+		for ( diagramType in this.styles ) {
+			style += this.styles[ diagramType ];
+		}
+		return style;
 	}
 
 	getConflicts(): Conflict[] {

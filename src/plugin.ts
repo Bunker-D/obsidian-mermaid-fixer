@@ -75,10 +75,15 @@ export default class MermaidArrowSaver extends Plugin {
 	}
 
 	private addButtonForDiagramTypes(): void {
-		const defSVG = `<defs id="${ BUTTON_DEFS_ID }">${ this.mermaidDefinitions.getSVGDefinitions() }</defs>`;
+		const defSVG = `<defs id="${ BUTTON_DEFS_ID }">${ this.buildDefsContent() }</defs>`;
 		const buttonIcon = `<g id="${ BUTTON_PATH_ID }">${ ( this.settings.visibleButton ) ? BUTTON_ICON : '' }</g>`;
 		addIcon( 'mermaid-arrow-saver', defSVG + buttonIcon );
 		this.addRibbonIcon( 'mermaid-arrow-saver', 'Mermaid Arrow Saver', this.createButtonFunction() );
+	}
+
+	private buildDefsContent(): string {
+		return this.mermaidDefinitions.getSVGDefinitions() +
+			`<style>${ this.mermaidDefinitions.getStyles() }</style>`;
 	}
 
 	private createButtonFunction(): ( e: MouseEvent ) => void {
@@ -101,22 +106,26 @@ export default class MermaidArrowSaver extends Plugin {
 	private applyDiagramTypesSelection(): void {
 		const definitionsEl = document.getElementById( BUTTON_DEFS_ID );
 		if ( !definitionsEl ) return;
-		definitionsEl.innerHTML = this.mermaidDefinitions.getSVGDefinitions();
+		definitionsEl.innerHTML = this.buildDefsContent();
 	}
 
 	private toggleDefIDs(): void {
 		const defs = document.getElementById( BUTTON_DEFS_ID );
-		if ( !defs || !defs.firstElementChild ) return;
-		const firstID = defs.firstElementChild.id;
-		const idsAreInactive = firstID.startsWith( '---' );
+		if ( !defs ) return;
+		const mustDeactivate = defs.dataset.inactive !== 'true';
+		defs.dataset.inactive = '' + mustDeactivate;
 		const modID: ( id: string ) => string =
-			( idsAreInactive )
-				? ( id ) => id.substring( 3 )
-				: ( id ) => '---' + id;
-		for ( const marker of defs.children ) {
-			marker.id = modID( marker.id );
+			( mustDeactivate )
+				? ( id ) => '---' + id
+				: ( id ) => id.substring( 3 );
+		for ( const el of defs.children ) {
+			if ( el.tagName === 'style' ) {
+				( el as HTMLStyleElement ).disabled = mustDeactivate;
+			} else {
+				el.id = modID( el.id );
+			}
 		}
-		const message = ( idsAreInactive ) ? '🧜‍♀️🔱 ACTIVATED ✅' : '🧜‍♀️🚫 DEACTIVATED ❌';
+		const message = ( mustDeactivate ) ? '🧜‍♀️🚫 DEACTIVATED ❌' : '🧜‍♀️🔱 ACTIVATED ✅';
 		new Notice( message );
 		console.log( message );
 	}

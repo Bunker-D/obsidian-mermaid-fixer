@@ -1,7 +1,8 @@
 /*
 	This files stores data about Mermaid graphs:
-	- The covered chart type,
-	- The defined markers and symbols that may suffer from duplicated IDs.
+	- The covered diagram type,
+	- The defined markers and symbols that may suffer from duplicated IDs,
+	- Syle fixes, when needed.
 
 	This is the file that most probably would need to be update if Mermaid changes how it compiles SVGs.
 
@@ -27,10 +28,11 @@ export type DiagramType =
 	'C4Context';
 
 export type SVGContent = string;
+export type CSSContent = string;
 export type MarkerID = string;
 
 type MarkerMap = { [ key: MarkerID ]: SVGContent; };
-type DiagramData = { description: string, definitions: MarkerMap; };
+type DiagramData = { description: string, definitions: MarkerMap, style?: CSSContent; };
 
 export const MERMAID_DATA: { [ key in DiagramType ]: DiagramData } = {
 	flowchart: {
@@ -64,6 +66,8 @@ export const MERMAID_DATA: { [ key in DiagramType ]: DiagramData } = {
 			'sequencenumber':
 				'<marker id="sequencenumber" fill="var(--text-normal)" refX="15" refY="15" markerWidth="60" markerHeight="40" orient="auto"><circle cx="15" cy="15" r="6"></circle></marker>',
 		},
+		style:
+			'.mermaid [aria-roledescription="sequence"] .sequenceNumber { fill: var(--background-primary) !important; }',
 	},
 	classDiagram: {
 		description:

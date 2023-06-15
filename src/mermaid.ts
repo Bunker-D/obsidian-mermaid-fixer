@@ -1,13 +1,21 @@
-import { MERMAID_DATA, DiagramType, MarkerID, SVGContent } from './mermaidData';
+import { MERMAID_DATA, DiagramType, MarkerID, SVGContent, CSSContent } from './mermaidData';
 
-export type { DiagramType, SVGContent, MarkerID } from './mermaidData';
+export type { DiagramType, SVGContent, CSSContent, MarkerID } from './mermaidData';
 export type MarkersByID = { [ key: MarkerID ]: SVGContent; };
 export type MarkersByDiagramType = { [ key in DiagramType ]?: SVGContent; };
 
 export abstract class Mermaid {
 
+	static getDiagramTypeDescription( diagramType: DiagramType ): string {
+		return MERMAID_DATA[ diagramType ].description;
+	}
+
 	static getMarkersForDiagramType( diagramType: DiagramType ): MarkersByID {
 		return MERMAID_DATA[ diagramType ].definitions;
+	}
+
+	static getDiagramTypeStyle( diagramType: DiagramType ): CSSContent {
+		return MERMAID_DATA[ diagramType ].style ?? '';
 	}
 
 	static getMapForDiagramTypes<T>( defaultValue: T ): { [ key in DiagramType ]: T } {
@@ -19,7 +27,4 @@ export abstract class Mermaid {
 		return map as { [ key in DiagramType ]: T };
 	}
 
-	static getDiagramTypeDescription( diagramType: DiagramType ): string {
-		return MERMAID_DATA[ diagramType ].description;
-	}
 }
