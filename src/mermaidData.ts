@@ -96,15 +96,13 @@ export const MERMAID_DATA: { [ key in DiagramType ]: DiagramData } = {
 		},
 		style:
 			'.mermaid [aria-roledescription="classDiagram"] .relation{stroke:var(--text-normal)!important;}',
-		//TODO authorize lollipop (or all markers) overflow
-		//TODO correct lollipop colors in dark theme
 	},
 	stateDiagram: {
 		description:
 			'State diagrams',
 		definitions: {
 			'statediagram-barbEnd':
-				'<marker id="statediagram-barbEnd" stroke="var(--text-normal)" fill="var(--text-normal)" refX="19" refY="7" markerWidth="20" markerHeight="14" markerUnits="strokeWidth" orient="auto"><path stroke-width="1" d="M 19,7 L9,13 L14,7 L9,1 Z"></path></marker>',
+				'<marker id="statediagram-barbEnd" stroke="var(--text-normal)" stroke-width="1" fill="var(--text-normal)" refX="19" refY="7" markerWidth="20" markerHeight="14" markerUnits="strokeWidth" orient="auto"><path d="M 19,7 L9,13 L14,7 L9,1 Z" /></marker>',
 		},
 	},
 	erDiagram: {
@@ -112,21 +110,21 @@ export const MERMAID_DATA: { [ key in DiagramType ]: DiagramData } = {
 			'Entity Relationship diagrams',
 		definitions: {
 			'ONLY_ONE_START':
-				'<marker id="ONLY_ONE_START" stroke="var(--text-muted)" stroke-width="1" fill="none" refX="0" refY="9" markerWidth="18" markerHeight="18" orient="auto"><path d="M9,0 L9,18 M15,0 L15,18"></path></marker>',
+				'<marker id="ONLY_ONE_START" stroke="var(--text-muted)" stroke-width="1" fill="none" refX="0" refY="9" markerWidth="18" markerHeight="18" orient="auto"><path d="M9,0 L9,18 M15,0 L15,18" /></marker>',
 			'ONLY_ONE_END':
-				'<marker id="ONLY_ONE_END" stroke="var(--text-muted)" stroke-width="1" fill="none" refX="18" refY="9" markerWidth="18" markerHeight="18" orient="auto"><path d="M3,0 L3,18 M9,0 L9,18"></path></marker>',
+				'<marker id="ONLY_ONE_END" stroke="var(--text-muted)" stroke-width="1" fill="none" refX="18" refY="9" markerWidth="18" markerHeight="18" orient="auto"><path d="M3,0 L3,18 M9,0 L9,18" /></marker>',
 			'ZERO_OR_ONE_START':
-				'<marker id="ZERO_OR_ONE_START" stroke="var(--text-muted)" stroke-width="1" fill="none" refX="0" refY="9" markerWidth="30" markerHeight="18" orient="auto"><circle fill="var(--background-primary)" cx="21" cy="9" r="6"></circle><path d="M9,0 L9,18"></path></marker>',
+				'<marker id="ZERO_OR_ONE_START" stroke="var(--text-muted)" stroke-width="1" fill="none" refX="0" refY="9" markerWidth="30" markerHeight="18" orient="auto"><circle fill="var(--background-primary)" cx="21" cy="9" r="6" /><path d="M9,0 L9,18" /></marker>',
 			'ZERO_OR_ONE_END':
-				'<marker id="ZERO_OR_ONE_END" stroke="var(--text-muted)" stroke-width="1" fill="none" refX="30" refY="9" markerWidth="30" markerHeight="18" orient="auto"><circle fill="var(--background-primary)" cx="9" cy="9" r="6"></circle><path d="M21,0 L21,18"></path></marker>',
+				'<marker id="ZERO_OR_ONE_END" stroke="var(--text-muted)" stroke-width="1" fill="none" refX="30" refY="9" markerWidth="30" markerHeight="18" orient="auto"><circle fill="var(--background-primary)" cx="9" cy="9" r="6" /><path d="M21,0 L21,18" /></marker>',
 			'ONE_OR_MORE_START':
-				'<marker id="ONE_OR_MORE_START" stroke="var(--text-muted)" stroke-width="1" fill="none" refX="18" refY="18" markerWidth="45" markerHeight="36" orient="auto"><path d="M0,18 Q 18,0 36,18 Q 18,36 0,18 M42,9 L42,27"></path></marker>',
+				'<marker id="ONE_OR_MORE_START" stroke="var(--text-muted)" stroke-width="1" fill="none" refX="18" refY="18" markerWidth="45" markerHeight="36" orient="auto"><path d="M0,18 Q 18,0 36,18 Q 18,36 0,18 M42,9 L42,27" /></marker>',
 			'ONE_OR_MORE_END':
-				'<marker id="ONE_OR_MORE_END" stroke="var(--text-muted)" stroke-width="1" fill="none" refX="27" refY="18" markerWidth="45" markerHeight="36" orient="auto"><path d="M3,9 L3,27 M9,18 Q27,0 45,18 Q27,36 9,18"></path></marker>',
+				'<marker id="ONE_OR_MORE_END" stroke="var(--text-muted)" stroke-width="1" fill="none" refX="27" refY="18" markerWidth="45" markerHeight="36" orient="auto"><path d="M3,9 L3,27 M9,18 Q27,0 45,18 Q27,36 9,18" /></marker>',
 			'ZERO_OR_MORE_START':
-				'<marker id="ZERO_OR_MORE_START" stroke="var(--text-muted)" stroke-width="1" fill="none" refX="18" refY="18" markerWidth="57" markerHeight="36" orient="auto"><circle fill="var(--background-primary)" cx="48" cy="18" r="6"></circle><path d="M0,18 Q18,0 36,18 Q18,36 0,18"></path></marker>',
+				'<marker id="ZERO_OR_MORE_START" stroke="var(--text-muted)" stroke-width="1" fill="none" refX="18" refY="18" markerWidth="57" markerHeight="36" orient="auto"><circle fill="var(--background-primary)" cx="48" cy="18" r="6" /><path d="M0,18 Q18,0 36,18 Q18,36 0,18" /></marker>',
 			'ZERO_OR_MORE_END':
-				'<marker id="ZERO_OR_MORE_END" stroke="var(--text-muted)" stroke-width="1" fill="none" refX="39" refY="18" markerWidth="57" markerHeight="36" orient="auto"><circle fill="var(--background-primary)" cx="9" cy="18" r="6"></circle><path d="M21,18 Q39,0 57,18 Q39,36 21,18"></path></marker>',
+				'<marker id="ZERO_OR_MORE_END" stroke="var(--text-muted)" stroke-width="1" fill="none" refX="39" refY="18" markerWidth="57" markerHeight="36" orient="auto"><circle fill="var(--background-primary)" cx="9" cy="18" r="6" /><path d="M21,18 Q39,0 57,18 Q39,36 21,18" /></marker>',
 		},
 		style:
 			'.mermaid [aria-roledescription="er"] path.er{stroke:var(--text-muted)!important;}',
