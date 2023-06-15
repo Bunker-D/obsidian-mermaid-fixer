@@ -40,17 +40,17 @@ export const MERMAID_DATA: { [ key in DiagramType ]: DiagramData } = {
 			'Flowcharts',
 		definitions: {
 			'flowchart-pointEnd':
-				'<marker id="flowchart-pointEnd" stroke="var(--text-normal)" fill="var(--text-normal)" class="marker flowchart" viewBox="0 0 10 10" refX="10" refY="5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></path></marker>',
+				'<marker id="flowchart-pointEnd" stroke="var(--text-normal)" stroke-width="1" fill="var(--text-normal)" class="marker flowchart" viewBox="0 0 10 10" refX="10" refY="5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" class="arrowMarkerPath" /></marker>',
 			'flowchart-pointStart':
-				'<marker id="flowchart-pointStart" stroke="var(--text-normal)" fill="var(--text-normal)" class="marker flowchart" viewBox="0 0 10 10" refX="0" refY="5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto"><path d="M 0 5 L 10 10 L 10 0 z" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></path></marker>',
+				'<marker id="flowchart-pointStart" stroke="var(--text-normal)" stroke-width="1" fill="var(--text-normal)" class="marker flowchart" viewBox="0 0 10 10" refX="0" refY="5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto"><path d="M 0 5 L 10 10 L 10 0 z" class="arrowMarkerPath" /></marker>',
 			'flowchart-circleEnd':
-				'<marker id="flowchart-circleEnd" stroke="var(--text-normal)" fill="var(--text-normal)" class="marker flowchart" viewBox="0 0 10 10" refX="11" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></circle></marker>',
+				'<marker id="flowchart-circleEnd" stroke="var(--text-normal)" stroke-width="1" fill="var(--text-normal)" class="marker flowchart" viewBox="0 0 10 10" refX="11" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" /></marker>',
 			'flowchart-circleStart':
-				'<marker id="flowchart-circleStart" stroke="var(--text-normal)" fill="var(--text-normal)" class="marker flowchart" viewBox="0 0 10 10" refX="-1" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></circle></marker>',
+				'<marker id="flowchart-circleStart" stroke="var(--text-normal)" stroke-width="1" fill="var(--text-normal)" class="marker flowchart" viewBox="0 0 10 10" refX="-1" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" /></marker>',
 			'flowchart-crossEnd':
-				'<marker id="flowchart-crossEnd" stroke="var(--text-normal)" fill="var(--text-normal)" class="marker cross flowchart" viewBox="0 0 11 11" refX="12" refY="5.2" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M 1,1 l 9,9 M 10,1 l -9,9" class="arrowMarkerPath" style="stroke-width: 2; stroke-dasharray: 1, 0;"></path></marker>',
+				'<marker id="flowchart-crossEnd" stroke="var(--text-normal)" stroke-width="2" fill="var(--text-normal)" class="marker cross flowchart" viewBox="0 0 11 11" refX="12" refY="5.2" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M 1,1 l 9,9 M 10,1 l -9,9" class="arrowMarkerPath" /></marker>',
 			'flowchart-crossStart':
-				'<marker id="flowchart-crossStart" stroke="var(--text-normal)" fill="var(--text-normal)" class="marker cross flowchart" viewBox="0 0 11 11" refX="-1" refY="5.2" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M 1,1 l 9,9 M 10,1 l -9,9" class="arrowMarkerPath" style="stroke-width: 2; stroke-dasharray: 1, 0;"></path></marker>',
+				'<marker id="flowchart-crossStart" stroke="var(--text-normal)" stroke-width="2" fill="var(--text-normal)" class="marker cross flowchart" viewBox="0 0 11 11" refX="-1" refY="5.2" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M 1,1 l 9,9 M 10,1 l -9,9" class="arrowMarkerPath" /></marker>',
 		},
 	},
 	sequenceDiagram: {
