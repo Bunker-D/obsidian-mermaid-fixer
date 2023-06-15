@@ -72,7 +72,7 @@ export const MERMAID_DATA: { [ key in DiagramType ]: DiagramData } = {
 	classDiagram: {
 		description:
 			'Class diagrams',
-		definitions: {
+		definitions: { //TODO
 			'classDiagram-aggregationStart':
 				'<marker id="classDiagram-aggregationStart" class="marker aggregation classDiagram" refX="0" refY="7" markerWidth="190" markerHeight="240" orient="auto"><path d="M 18,7 L9,13 L1,7 L9,1 Z"></path></marker>',
 			'classDiagram-aggregationEnd':
@@ -100,13 +100,13 @@ export const MERMAID_DATA: { [ key in DiagramType ]: DiagramData } = {
 			'State diagrams',
 		definitions: {
 			'statediagram-barbEnd':
-				'<marker id="statediagram-barbEnd" refX="19" refY="7" markerWidth="20" markerHeight="14" markerUnits="strokeWidth" orient="auto"><path d="M 19,7 L9,13 L14,7 L9,1 Z"></path></marker>',
+				'<marker id="statediagram-barbEnd" stroke="var(--text-normal)" fill="var(--text-normal)" refX="19" refY="7" markerWidth="20" markerHeight="14" markerUnits="strokeWidth" orient="auto"><path stroke-width="1" d="M 19,7 L9,13 L14,7 L9,1 Z"></path></marker>',
 		},
 	},
 	erDiagram: {
 		description:
 			'Entity Relationship diagrams',
-		definitions: {
+		definitions: { //TODO
 			'ONLY_ONE_START':
 				'<marker id="ONLY_ONE_START" refX="0" refY="9" markerWidth="18" markerHeight="18" orient="auto"><path stroke="gray" fill="none" d="M9,0 L9,18 M15,0 L15,18"></path></marker>',
 			'ONLY_ONE_END':
@@ -128,7 +128,7 @@ export const MERMAID_DATA: { [ key in DiagramType ]: DiagramData } = {
 	journey: {
 		description:
 			'User journeys',
-		definitions: {
+		definitions: { //TODO
 			'arrowhead':
 				'<marker id="arrowhead" refX="5" refY="2" markerWidth="6" markerHeight="4" orient="auto"><path d="M 0,0 V 4 L6,2 Z"></path></marker>',
 		},
@@ -146,7 +146,7 @@ export const MERMAID_DATA: { [ key in DiagramType ]: DiagramData } = {
 	requirementDiagram: {
 		description:
 			'Requirement diagrams',
-		definitions: {
+		definitions: { //TODO
 			'contains_line_ending':
 				'<marker id="contains_line_ending" refX="0" refY="10" markerWidth="20" markerHeight="20" orient="auto"><g><circle cx="10" cy="10" r="10" fill="none"></circle><line x1="0" x2="20" y1="10" y2="10" stroke-width="1"></line><line y1="0" y2="20" x1="10" x2="10" stroke-width="1"></line></g></marker>',
 			'arrow_line_ending':
@@ -161,7 +161,7 @@ export const MERMAID_DATA: { [ key in DiagramType ]: DiagramData } = {
 	C4Context: {
 		description:
 			'C4 Context diagrams',
-		definitions: {
+		definitions: { //TODO
 			'arrowhead':
 				'<marker id="arrowhead" refX="9" refY="5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z"></path></marker>',
 			'arrowend':
