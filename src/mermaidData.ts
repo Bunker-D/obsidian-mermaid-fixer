@@ -58,13 +58,13 @@ export const MERMAID_DATA: { [ key in DiagramType ]: DiagramData } = {
 			'Sequence diagrams',
 		definitions: {
 			'arrowhead':
-				'<marker id="arrowhead" stroke="var(--text-normal)" stroke-width="1" fill="var(--text-normal)" refX="9" refY="5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z"></path></marker>',
+				'<marker id="arrowhead" stroke="var(--text-normal)" stroke-width="1" fill="var(--text-normal)" refX="9" refY="5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" /></marker>',
 			'crosshead':
-				'<marker id="crosshead" stroke="var(--text-normal)" markerWidth="15" markerHeight="8" orient="auto" refX="4" refY="5"><path stroke-width="1pt" d="M 1,2 L 6,7 M 6,2 L 1,7" style="stroke-dasharray: 0, 0;"></path></marker>',
+				'<marker id="crosshead" stroke="var(--text-normal)" markerWidth="15" markerHeight="8" orient="auto" refX="4" refY="5"><path stroke-width="1pt" d="M 1,2 L 6,7 M 6,2 L 1,7" style="stroke-dasharray: 0, 0;" /></marker>',
 			'filled-head':
-				'<marker id="filled-head" stroke="none" fill="var(--text-normal)" refX="18" refY="7" markerWidth="20" markerHeight="28" orient="auto"><path d="M 18,7 L9,13 L14,7 L9,1 Z"></path></marker>',
+				'<marker id="filled-head" stroke="none" fill="var(--text-normal)" refX="18" refY="7" markerWidth="20" markerHeight="28" orient="auto"><path d="M 18,7 L9,13 L14,7 L9,1 Z" /></marker>',
 			'sequencenumber':
-				'<marker id="sequencenumber" fill="var(--text-normal)" refX="15" refY="15" markerWidth="60" markerHeight="40" orient="auto"><circle cx="15" cy="15" r="6"></circle></marker>',
+				'<marker id="sequencenumber" fill="var(--text-normal)" refX="15" refY="15" markerWidth="60" markerHeight="40" orient="auto"><circle cx="15" cy="15" r="6" /></marker>',
 		},
 		style:
 			'.mermaid [aria-roledescription="sequence"] .sequenceNumber{fill:var(--background-primary)!important;}',
