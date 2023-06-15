@@ -132,9 +132,9 @@ export const MERMAID_DATA: { [ key in DiagramType ]: DiagramData } = {
 	journey: {
 		description:
 			'User journeys',
-		definitions: { //TODO could be identical to others with style correction?
+		definitions: {
 			'arrowhead':
-				'<marker id="arrowhead" refX="5" refY="2" markerWidth="6" markerHeight="4" orient="auto"><path d="M 0,0 V 4 L6,2 Z"></path></marker>',
+				'<marker id="arrowhead" fill="var(--text-normal)" refX="5" refY="2" markerWidth="6" markerHeight="4" orient="auto"><path d="M 0,0 V 4 L6,2 Z" /></marker>',
 		},
 	},
 	gantt: {
@@ -167,11 +167,12 @@ export const MERMAID_DATA: { [ key in DiagramType ]: DiagramData } = {
 	C4Context: {
 		description:
 			'C4 Context diagrams',
-		definitions: { //TODO
+		definitions: {
 			'arrowhead':
-				'<marker id="arrowhead" refX="9" refY="5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z"></path></marker>',
+				'<marker id="arrowhead" stroke="var(--text-normal)" stroke-width="1" fill="var(--text-normal)" refX="9" refY="5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" /></marker>',
 			'arrowend':
-				'<marker id="arrowend" refX="1" refY="5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto"><path d="M 10 0 L 0 5 L 10 10 z"></path></marker>',
+				'<marker id="arrowend" stroke="var(--text-normal)" stroke-width="1" fill="var(--text-normal)" refX="1" refY="5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto"><path d="M 10 0 L 0 5 L 10 10 z" /></marker>',
+			// We can only make a marker with a given color. It cannot be the color of the link in the C4C diagram. We make the marker identical to the ones in sequence diagrams to ensure compatibility.
 		},
 	},
 } as const;

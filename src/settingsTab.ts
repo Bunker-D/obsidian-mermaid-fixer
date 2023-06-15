@@ -1,4 +1,4 @@
-import { App, ColorComponent, PluginSettingTab, Setting } from 'obsidian';
+import { App, PluginSettingTab, Setting } from 'obsidian';
 import MermaidArrowSaver from './plugin';
 import { DiagramType, Mermaid } from './mermaid';
 import { Conflict } from './mermaidDefinitions';

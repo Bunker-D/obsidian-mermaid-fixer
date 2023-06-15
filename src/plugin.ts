@@ -88,8 +88,8 @@ export default class MermaidArrowSaver extends Plugin {
 
 	private createButtonFunction(): ( e: MouseEvent ) => void {
 		return ( e ) => {
-			// new Notice( 'This button keeps Mermaid arrows visible.\nClicking it does nothing.' ); //HACK
-			this.toggleDefIDs(); //HACK Uncomment when updating the Mermaid markers, to toggle their effects by clicking the button.
+			new Notice( 'This button keeps Mermaid arrows visible.\nClicking it does nothing.' );
+			// this.toggleDefIDs(); //HACK Uncomment when updating the Mermaid markers, to toggle their effects by clicking the button.
 		};
 	}
 
