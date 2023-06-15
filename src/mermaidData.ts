@@ -67,7 +67,7 @@ export const MERMAID_DATA: { [ key in DiagramType ]: DiagramData } = {
 				'<marker id="sequencenumber" fill="var(--text-normal)" refX="15" refY="15" markerWidth="60" markerHeight="40" orient="auto"><circle cx="15" cy="15" r="6"></circle></marker>',
 		},
 		style:
-			'.mermaid [aria-roledescription="sequence"] .sequenceNumber { fill: var(--background-primary) !important; }',
+			'.mermaid [aria-roledescription="sequence"] .sequenceNumber{fill:var(--background-primary)!important;}',
 	},
 	classDiagram: {
 		description:
@@ -95,7 +95,9 @@ export const MERMAID_DATA: { [ key in DiagramType ]: DiagramData } = {
 				'<marker id="classDiagram-lollipopEnd" stroke="var(--text-normal)" stroke-width="1" fill="var(--background-primary)" class="marker lollipop classDiagram" refX="12" refY="7" markerWidth="190" markerHeight="240" orient="auto"><circle stroke="black" fill="white" cx="6" cy="7" r="6"></circle></marker>',
 		},
 		style:
-			'.mermaid [aria-roledescription="classDiagram"] .relation { stroke: var(--text-normal) !important; }',
+			'.mermaid [aria-roledescription="classDiagram"] .relation{stroke:var(--text-normal)!important;}',
+		//TODO authorize lollipop (or all markers) overflow
+		//TODO correct lollipop colors in dark theme
 	},
 	stateDiagram: {
 		description:
@@ -127,7 +129,7 @@ export const MERMAID_DATA: { [ key in DiagramType ]: DiagramData } = {
 				'<marker id="ZERO_OR_MORE_END" stroke="var(--text-muted)" stroke-width="1" fill="none" refX="39" refY="18" markerWidth="57" markerHeight="36" orient="auto"><circle fill="var(--background-primary)" cx="9" cy="18" r="6"></circle><path d="M21,18 Q39,0 57,18 Q39,36 21,18"></path></marker>',
 		},
 		style:
-		'.mermaid [aria-roledescription="er"] path.er { stroke: var(--text-muted) !important; }',
+			'.mermaid [aria-roledescription="er"] path.er{stroke:var(--text-muted)!important;}',
 	},
 	journey: {
 		description:
@@ -150,12 +152,14 @@ export const MERMAID_DATA: { [ key in DiagramType ]: DiagramData } = {
 	requirementDiagram: {
 		description:
 			'Requirement diagrams',
-		definitions: { //TODO
+		definitions: {
 			'contains_line_ending':
-				'<marker id="contains_line_ending" refX="0" refY="10" markerWidth="20" markerHeight="20" orient="auto"><g><circle cx="10" cy="10" r="10" fill="none"></circle><line x1="0" x2="20" y1="10" y2="10" stroke-width="1"></line><line y1="0" y2="20" x1="10" x2="10" stroke-width="1"></line></g></marker>',
+				'<marker id="contains_line_ending" stroke="var(--text-muted)" stroke-width="1" fill="var(--background-primary)" style="overflow:visible" refX="0" refY="10" markerWidth="20" markerHeight="20" orient="auto"><circle cx="10" cy="10" r="10"></circle><line x1="0" x2="20" y1="10" y2="10"></line><line y1="0" y2="20" x1="10" x2="10"></line></marker>',
 			'arrow_line_ending':
-				'<marker id="arrow_line_ending" refX="20" refY="10" markerWidth="20" markerHeight="20" orient="auto"><path d="M0,0L20,10 M20,10 L0,20" stroke-width="1"></path></marker>',
+				'<marker id="arrow_line_ending" stroke="var(--text-muted)" stroke-width="1" fill="var(--background-primary)" style="overflow:visible" refX="20" refY="10" markerWidth="20" markerHeight="20" orient="auto"><path d="M0,0L20,10 M20,10 L0,20"></path></marker>',
 		},
+		style:
+			'.mermaid [aria-roledescription="requirement"] path.er{stroke:var(--text-normal)!important;}.mermaid [aria-roledescription="requirement"] .reqBox{fill:var(--background-primary-alt)!important;stroke:var(--text-muted)!important}.mermaid [aria-roledescription="requirement"] .reqLabelBox{fill:var(--background-secondary)!important;stroke:none!important}.mermaid [aria-roledescription="requirement"] .req-title-line{stroke:var(--text-muted)!important}.mermaid [aria-roledescription="requirement"] .relationshipLabel{fill:var(--text-normal)!important}',
 	},
 	gitGraph: {
 		description:
