@@ -152,9 +152,9 @@ export const MERMAID_DATA: { [ key in DiagramType ]: DiagramData } = {
 			'Requirement diagrams',
 		definitions: {
 			'contains_line_ending':
-				'<marker id="contains_line_ending" stroke="var(--text-muted)" stroke-width="1" fill="var(--background-primary)" style="overflow:visible" refX="0" refY="10" markerWidth="20" markerHeight="20" orient="auto"><circle cx="10" cy="10" r="10"></circle><line x1="0" x2="20" y1="10" y2="10"></line><line y1="0" y2="20" x1="10" x2="10"></line></marker>',
+				'<marker id="contains_line_ending" stroke="var(--text-muted)" stroke-width="1" fill="var(--background-primary)" style="overflow:visible" refX="0" refY="10" markerWidth="20" markerHeight="20" orient="auto"><circle cx="10" cy="10" r="10" /><line x1="0" x2="20" y1="10" y2="10" /><line y1="0" y2="20" x1="10" x2="10" /></marker>',
 			'arrow_line_ending':
-				'<marker id="arrow_line_ending" stroke="var(--text-muted)" stroke-width="1" fill="var(--background-primary)" style="overflow:visible" refX="20" refY="10" markerWidth="20" markerHeight="20" orient="auto"><path d="M0,0L20,10 M20,10 L0,20"></path></marker>',
+				'<marker id="arrow_line_ending" stroke="var(--text-muted)" stroke-width="1" fill="var(--background-primary)" style="overflow:visible" refX="20" refY="10" markerWidth="20" markerHeight="20" orient="auto"><path d="M0,0L20,10 M20,10 L0,20" /></marker>',
 		},
 		style:
 			'.mermaid [aria-roledescription="requirement"] path.er{stroke:var(--text-normal)!important;}.mermaid [aria-roledescription="requirement"] .reqBox{fill:var(--background-primary-alt)!important;stroke:var(--text-muted)!important}.mermaid [aria-roledescription="requirement"] .reqLabelBox{fill:var(--background-secondary)!important;stroke:none!important}.mermaid [aria-roledescription="requirement"] .req-title-line{stroke:var(--text-muted)!important}.mermaid [aria-roledescription="requirement"] .relationshipLabel{fill:var(--text-normal)!important}',
