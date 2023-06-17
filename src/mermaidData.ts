@@ -136,6 +136,8 @@ export const MERMAID_DATA: { [ key in DiagramType ]: DiagramData } = {
 			'arrowhead':
 				'<marker id="arrowhead" fill="var(--text-normal)" refX="5" refY="2" markerWidth="6" markerHeight="4" orient="auto"><path d="M 0,0 V 4 L6,2 Z" /></marker>',
 		},
+		style:
+		'.mermaid [aria-roledescription="journey"] .label{color:#000!important;}',
 	},
 	gantt: {
 		description:
