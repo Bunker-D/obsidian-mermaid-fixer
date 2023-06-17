@@ -1,9 +1,9 @@
 {
-	"id": "keep-mermaid-arrow",
-	"name": "Keep Mermaid Arrows",
+	"id": "mermaid-fixer",
+	"name": "Mermaid Fixer",
 	"version": "1.0.0",
 	"minAppVersion": "0.15.0",
-	"description": "When using Mermaid to create graphs in Obsidian, a bug makes the arrows disappear sometimes. This plugin is a hack that keeps those arrows visible.",
+	"description": "Keeps Mermaid arrows from disappearing, and fixes styling errors impacting dark modes.",
 	"author": "Bunker D",
 	"authorUrl": "https://github.com/Bunker-D",
 	"isDesktopOnly": true

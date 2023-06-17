@@ -1,14 +1,14 @@
 import { Notice, Plugin, addIcon } from 'obsidian';
 import { DiagramType } from './mermaid';
 import { Conflict, MermaidDefinitions } from './mermaidDefinitions';
-import { BUTTON_ICON } from './icons'; import { MermaidArrowSaverSettingTab } from './settingsTab';
+import { BUTTON_ICON } from './icons'; import { MermaidFixerSettingTab } from './settingsTab';
 
-interface MermaidArrowSaverSettings {
+interface MermaidFixerSettings {
 	selectedDiagramTypes: DiagramType[];
 	visibleButton: boolean;
 };
 
-const DEFAULT_SETTINGS: MermaidArrowSaverSettings = {
+const DEFAULT_SETTINGS: MermaidFixerSettings = {
 	selectedDiagramTypes: [
 		'flowchart',
 		'sequenceDiagram',
@@ -23,17 +23,17 @@ const DEFAULT_SETTINGS: MermaidArrowSaverSettings = {
 	visibleButton: true,
 };
 
-const BUTTON_DEFS_ID = 'mermaid-defs-saver' as const;
-const BUTTON_PATH_ID = 'mermaid-defs-saver-path' as const;
+const BUTTON_DEFS_ID = 'mermaid-fixer-defs' as const;
+const BUTTON_PATH_ID = 'mermaid-fixer-button-path' as const;
 
-export default class MermaidArrowSaver extends Plugin {
-	private settings: MermaidArrowSaverSettings;
+export default class MermaidFixer extends Plugin {
+	private settings: MermaidFixerSettings;
 	private mermaidDefinitions: MermaidDefinitions;
 
 	async onload() {
 		await this.loadSettings();
 		this.addButtonForDiagramTypes();
-		this.addSettingTab( new MermaidArrowSaverSettingTab( this.app, this ) );
+		this.addSettingTab( new MermaidFixerSettingTab( this.app, this ) );
 	}
 
 	getButtonVisibility(): boolean {
@@ -77,8 +77,8 @@ export default class MermaidArrowSaver extends Plugin {
 	private addButtonForDiagramTypes(): void {
 		const defSVG = `<defs id="${ BUTTON_DEFS_ID }">${ this.buildDefsContent() }</defs>`;
 		const buttonIcon = `<g id="${ BUTTON_PATH_ID }">${ ( this.settings.visibleButton ) ? BUTTON_ICON : '' }</g>`;
-		addIcon( 'mermaid-arrow-saver', defSVG + buttonIcon );
-		this.addRibbonIcon( 'mermaid-arrow-saver', 'Mermaid Arrow Saver', this.createButtonFunction() );
+		addIcon( 'mermaid-fixer', defSVG + buttonIcon );
+		this.addRibbonIcon( 'mermaid-fixer', 'Mermaid Fixer', this.createButtonFunction() );
 	}
 
 	private buildDefsContent(): string {

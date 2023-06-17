@@ -1,20 +1,20 @@
 import { App, PluginSettingTab, Setting } from 'obsidian';
-import MermaidArrowSaver from './plugin';
+import MermaidFixer from './plugin';
 import { DiagramType, Mermaid } from './mermaid';
 import { Conflict } from './mermaidDefinitions';
 import { WARNING_SVG } from './icons';
 
-const HIGHLIGHT_CLASS = 'mermaid-save-arrow-highlight' as const;
-const CALLOUT_CLASS = 'mermaid-arrow-saver-setting-callout' as const;
-const ID_PREFIX = 'mermaid-save-arrow-opt-' as const;
+const HIGHLIGHT_CLASS = 'mermaid-fixer-highlight' as const;
+const CALLOUT_CLASS = 'mermaid-fixer-setting-callout' as const;
+const ID_PREFIX = 'mermaid-fixer-opt-' as const;
 
-export class MermaidArrowSaverSettingTab extends PluginSettingTab {
-	private plugin: MermaidArrowSaver;
+export class MermaidFixerSettingTab extends PluginSettingTab {
+	private plugin: MermaidFixer;
 	private diagramTypesSelection: { [ key in DiagramType ]: boolean; };
 	private conflictsSection: HTMLElement;
 	private conflictsListEl: HTMLElement;
 
-	constructor( app: App, plugin: MermaidArrowSaver ) {
+	constructor( app: App, plugin: MermaidFixer ) {
 		super( app, plugin );
 		this.plugin = plugin;
 	}
