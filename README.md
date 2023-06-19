@@ -1,24 +1,32 @@
-# Keep Mermaid Arrows
+# Mermaid Fixer
 
-<!-- TODO Plugin presentation -->
-<!-- TODO Does it also correct styling issues due to the non-consideration of dark modes? -->
+## Plugin presentation
+
+Obsidian supports [Mermaid diagrams](https://mermaid.js.org/intro/), but their implementation suffers from two issues:
+- Arrows are sometimes not rendered (e.g., when going from *Edit* to *Read* view),
+- Some of the styling doesn't properly adapt to Obsidian colors, sometimes leading to illegible results when using a dark color scheme.
+
+This plugin is a hack that takes care of both these issues.
+
+![Before/After for a flowchart, a class diagram, a sequence diagram and a requirement diagram](./readme_assets/before-after.png)
 
 ## How it works
 
-### Basic idea
+All the magic is contained in the plugin button in the ribbon. It is used to define Mermaid arrows in a safe place.
+Thus, the button needs to exist, but clicking it actually does nothing.
 
-<!-- TODO Explain -->
+(For more details, check the [Developer's Readme](src/README.md).)
 
-### Files
+## Settings
 
-- `mermaid_data.ts`: Store the necessary data about Mermaid graphs, i.e., what graphs are covered, and the markers and symbols they use that may suffer from duplicated IDs. If the plugin must be updated due to changes done to Mermaid (i.e., changes in the marker IDs), this is most probably this file that must be updated.
+### Button visibility
 
-### Dev mode
+Because the plugin button needs to be there, but does nothing from a user standpoint, you can choose to make it (almost) invisible by making it empty, rather than using the Mermaid icon. It will still be there, just not visibile (except when bringing your mouse over it).
 
-A developper mode can be activated by setting the constant `DEV_MODE` to `true` in `src/plugin.ts`. It makes the plugin button have the effect of toggling the effects of the plugin (by actually changing the IDs it contains), in order to better see its effects.
+To avoid having an empty space in your ribbon, remember you can use the Obsidian settings to ensure that the button is at the end of the ribbon. To do so, find *“Ribbon menu*”, in the *“Appearance”* tab and under the *“Advanced”* section.
 
-It can be used to ensure that the markers and symbols defined in `mermaid_data.ts` give the proper results.
+### Covered Mermaid diagram types
 
-Don't forget to set `DEV_MODE` back to `false` when you're done.
+You can select what types of Mermaid diagrams this plugin takes care of.
 
-<!-- TODO Complete -->
+Know that there is an incompatibility between the standard arrow head used in user journeys, and the one used in sequence diagrams and C4 context diagrams. That being said, if you use both sequence diagrams and user journeys, the arrow head defined for sequence diagrams will be used in both cases, resulting in something still usable.
