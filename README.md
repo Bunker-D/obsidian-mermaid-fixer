@@ -30,3 +30,15 @@ To avoid having an empty space in your ribbon, remember you can use the Obsidian
 You can select what types of Mermaid diagrams this plugin takes care of.
 
 Know that there is an incompatibility between the standard arrow head used in user journeys, and the one used in sequence diagrams and C4 context diagrams. That being said, if you use both sequence diagrams and user journeys, the arrow head defined for sequence diagrams will be used in both cases, resulting in something still usable.
+
+## Installation
+
+The plugin is not yet added to the community plugins. You can install using the following steps:
+1. Have [Obsidian community plugins](https://help.obsidian.md/Extending+Obsidian/Community+plugins) enabled (*Setttings* → *Community plugins* → *Turn on community plugins*).
+2. Inside your vault folder, navigate to the folder `./.obsidian/plugins/`.
+3. There, create a folder name `mermaid-fixer/`, and copy inside the following files:
+	- `manifest.json`
+	- `main.js`
+	- `styles.css`
+4. Restart Obsidian.
+5. Go in *Settings* → *Community plugins*, and activate *Mermaid Fixer*.
