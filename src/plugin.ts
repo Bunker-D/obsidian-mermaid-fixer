@@ -97,7 +97,7 @@ export default class MermaidFixer extends Plugin {
 		const buttonIconEl = document.getElementById( BUTTON_PATH_ID );
 		if ( !buttonIconEl ) return;
 		if ( this.settings.visibleButton ) {
-			buttonIconEl.innerHTML = BUTTON_ICON;
+			buttonIconEl.innerHTML = BUTTON_ICON; // ✔ literal const
 		} else {
 			buttonIconEl.innerHTML = '';
 		}
@@ -106,7 +106,7 @@ export default class MermaidFixer extends Plugin {
 	private applyDiagramTypesSelection(): void {
 		const definitionsEl = document.getElementById( BUTTON_DEFS_ID );
 		if ( !definitionsEl ) return;
-		definitionsEl.innerHTML = this.buildDefsContent();
+		definitionsEl.innerHTML = this.buildDefsContent(); // ✔ literal (built from const in mermaidData.ts)
 	}
 
 	private toggleDefIDs(): void {

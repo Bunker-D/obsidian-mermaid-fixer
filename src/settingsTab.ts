@@ -92,7 +92,7 @@ export class MermaidFixerSettingTab extends PluginSettingTab {
 					attr: { 'data-callout': 'warning' }
 				} );
 		this.conflictsSection.createEl( 'h3' )
-			.innerHTML = WARNING_SVG + ' "Conflicts between selected diagram types:"';
+			.innerHTML = WARNING_SVG + ' "Conflicts between selected diagram types:"'; // ✔ literal (const)
 		this.conflictsListEl = this.conflictsSection.createEl( 'ul' );
 	}
 

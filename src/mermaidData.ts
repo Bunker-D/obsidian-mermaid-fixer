@@ -4,7 +4,10 @@
 	- The defined markers and symbols that may suffer from duplicated IDs,
 	- Syle fixes, when needed.
 
-	This is the file that most probably would need to be update if Mermaid changes how it compiles SVGs.
+	💡 To facilitate updates, we use HTML strings that will be inserted through innerHTML.
+	ONLY LITERAL STRINGS are used with innerHTML.
+
+	💡 This is the file that most probably would need to be update if Mermaid changes how it compiles SVGs.
 
 	⚠ Markers should not be just copy-pasted from the Mermaid-produced SVG:
 	- They must generally be completed with proper `fill` and `stroke` attributes.

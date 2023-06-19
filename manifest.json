@@ -3,7 +3,7 @@
 	"name": "Mermaid Fixer",
 	"version": "1.0.0",
 	"minAppVersion": "0.15.0",
-	"description": "Keeps Mermaid arrows from disappearing, and fixes styling errors impacting dark modes.",
+	"description": "Keep Mermaid arrows from disappearing, and fix styling errors impacting dark modes.",
 	"author": "Bunker D",
 	"authorUrl": "https://github.com/Bunker-D",
 	"isDesktopOnly": true
