@@ -2,7 +2,6 @@ import { App, PluginSettingTab, Setting } from 'obsidian';
 import MermaidFixer from './plugin';
 import { DiagramType, Mermaid } from './mermaid';
 import { Conflict } from './mermaidDefinitions';
-import { WARNING_SVG } from './icons';
 
 const HIGHLIGHT_CLASS = 'mermaid-fixer-highlight' as const;
 const CALLOUT_CLASS = 'mermaid-fixer-setting-callout' as const;
@@ -91,8 +90,42 @@ export class MermaidFixerSettingTab extends PluginSettingTab {
 					cls: 'callout ' + CALLOUT_CLASS,
 					attr: { 'data-callout': 'warning' }
 				} );
-		this.conflictsSection.createEl( 'h3' )
-			.innerHTML = WARNING_SVG + ' "Conflicts between selected diagram types:"'; // ✔ literal (const)
+		const h3 = this.conflictsSection.createEl( 'h3' );
+		const warningSVG = h3.createSvg( 'svg', {
+			attr: {
+				'viewBox': '0 0 24 24',
+				'width': '24',
+				'height': '24',
+				'fill': 'none',
+				'stroke': 'currentColor',
+				'stroke-width': '2',
+				'stroke-linecap': 'round',
+				'stroke-linejoin': 'round',
+			}
+		} );
+		warningSVG.createSvg( 'path', {
+			attr: {
+				'd': 'm21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z'
+			}
+		} );
+		warningSVG.createSvg( 'line', {
+			attr: {
+				'x1': '12',
+				'y1': '9',
+				'x2': '12',
+				'y2': '13',
+			}
+		} );
+		warningSVG.createSvg( 'line', {
+			attr: {
+				'x1': '12',
+				'y1': '17',
+				'x2': '12.01',
+				'y2': '17',
+			}
+		} );
+		// h3.appendChild( WARNING_SVG() )
+		h3.appendText( ' "Conflicts between selected diagram types:"' );
 		this.conflictsListEl = this.conflictsSection.createEl( 'ul' );
 	}
 

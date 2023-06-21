@@ -1,5 +1,5 @@
-import { Notice, Plugin, addIcon } from 'obsidian';
-import { DiagramType } from './mermaid';
+import { Notice, Plugin, addIcon, removeIcon, setIcon, getIconIds } from 'obsidian';
+import { DiagramType, SVGContent } from './mermaid';
 import { Conflict, MermaidDefinitions } from './mermaidDefinitions';
 import { BUTTON_ICON } from './icons'; import { MermaidFixerSettingTab } from './settingsTab';
 
@@ -23,12 +23,11 @@ const DEFAULT_SETTINGS: MermaidFixerSettings = {
 	visibleButton: true,
 };
 
-const BUTTON_DEFS_ID = 'mermaid-fixer-defs' as const;
-const BUTTON_PATH_ID = 'mermaid-fixer-button-path' as const;
-
 export default class MermaidFixer extends Plugin {
 	private settings: MermaidFixerSettings;
 	private mermaidDefinitions: MermaidDefinitions;
+	private ribbonButton: HTMLElement;
+	private iconID: string;
 
 	async onload() {
 		await this.loadSettings();
@@ -42,7 +41,7 @@ export default class MermaidFixer extends Plugin {
 
 	async setButtonVisibility( buttonVisibility: boolean ) {
 		this.settings.visibleButton = buttonVisibility;
-		this.applyButtonVisibility();
+		this.updateIcon();
 		this.saveSettings();
 	}
 
@@ -53,7 +52,7 @@ export default class MermaidFixer extends Plugin {
 	async setSelectedDiagramTypes( diagramType: DiagramType[] ) {
 		this.settings.selectedDiagramTypes = diagramType;
 		this.updateMermaidDefinitions();
-		this.applyDiagramTypesSelection();
+		this.updateIcon();
 		this.saveSettings();
 	}
 
@@ -75,10 +74,33 @@ export default class MermaidFixer extends Plugin {
 	}
 
 	private addButtonForDiagramTypes(): void {
-		const defSVG = `<defs id="${ BUTTON_DEFS_ID }">${ this.buildDefsContent() }</defs>`;
-		const buttonIcon = `<g id="${ BUTTON_PATH_ID }">${ ( this.settings.visibleButton ) ? BUTTON_ICON : '' }</g>`;
-		addIcon( 'mermaid-fixer', defSVG + buttonIcon );
-		this.addRibbonIcon( 'mermaid-fixer', 'Mermaid Fixer', this.createButtonFunction() );
+		this.updateIcon();
+		this.ribbonButton = this.addRibbonIcon( this.iconID, 'Mermaid Fixer', this.createButtonFunction() );
+	}
+
+	private updateIcon(): void {
+		if ( this.iconID ) {
+			removeIcon( this.iconID );
+		}
+		this.renewIconID();
+		const defSVG: SVGContent = `<defs>${ this.buildDefsContent() }</defs>`;
+		const buttonIcon: SVGContent = ( this.settings.visibleButton ) ? BUTTON_ICON : '';
+		addIcon( this.iconID, defSVG + buttonIcon );
+		if ( this.ribbonButton ) {
+			setIcon( this.ribbonButton, this.iconID );
+		}
+	}
+
+	private renewIconID(): void {
+		if ( !this.iconID ) {
+			this.iconID = 'mermaid-fixer';
+			return;
+		}
+		if ( this.iconID.endsWith( '-' ) ) {
+			this.iconID = this.iconID.substring( 0, this.iconID.length - 1 );
+			return;
+		}
+		this.iconID += '-';
 	}
 
 	private buildDefsContent(): string {
@@ -93,41 +115,16 @@ export default class MermaidFixer extends Plugin {
 		};
 	}
 
-	private applyButtonVisibility(): void {
-		const buttonIconEl = document.getElementById( BUTTON_PATH_ID );
-		if ( !buttonIconEl ) return;
-		if ( this.settings.visibleButton ) {
-			buttonIconEl.innerHTML = BUTTON_ICON; // ✔ literal const
-		} else {
-			buttonIconEl.innerHTML = '';
-		}
-	}
-
-	private applyDiagramTypesSelection(): void {
-		const definitionsEl = document.getElementById( BUTTON_DEFS_ID );
-		if ( !definitionsEl ) return;
-		definitionsEl.innerHTML = this.buildDefsContent(); // ✔ literal (built from const in mermaidData.ts)
-	}
-
 	private toggleDefIDs(): void {
-		const defs = document.getElementById( BUTTON_DEFS_ID );
-		if ( !defs ) return;
-		const mustDeactivate = defs.dataset.inactive !== 'true';
-		defs.dataset.inactive = '' + mustDeactivate;
-		const modID: ( id: string ) => string =
-			( mustDeactivate )
-				? ( id ) => '---' + id
-				: ( id ) => id.substring( 3 );
-		for ( const el of defs.children ) {
-			if ( el.tagName === 'style' ) {
-				( el as HTMLStyleElement ).disabled = mustDeactivate;
-			} else {
-				el.id = modID( el.id );
-			}
+		if ( getIconIds().indexOf( 'mermaid-fixer-off' ) < 0 ) {
+			const strike: SVGContent = '<line id="mermaid-fixer-off" x1="0" y1="100" x2="100" y2="0" stroke="currentColor" stroke-width="8.3" />';
+			addIcon( 'mermaid-fixer-off', BUTTON_ICON + strike );
 		}
-		const message = ( mustDeactivate ) ? '🧜‍♀️🚫 DEACTIVATED ❌' : '🧜‍♀️🔱 ACTIVATED ✅';
-		new Notice( message );
-		console.log( message );
+		if ( document.getElementById( 'mermaid-fixer-off' ) ) {
+			this.updateIcon();
+		} else {
+			setIcon( this.ribbonButton, 'mermaid-fixer-off' );
+		}
 	}
 
 }

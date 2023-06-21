@@ -74,9 +74,8 @@ flowchart
 	plugin -- handles markers\nand styles with ---> mermaidDefinitions
 	mermaidDefinitions -- gets data\nfrom --> mermaid
 	mermaid -- reads --> mermaidData
-	plugin -- gets button\nicon from ----> icons
+	plugin -- gets button\nicon from ---> icons
 	plugin -- delegates settings\ntab to ---> settingsTab
-	settingsTab -- uses an\nicon from --> icons
 	settingsTab -. styled\nwith .-> styles
 ```
 
@@ -113,7 +112,7 @@ The plugin-created markers should:
 - **Match those created** by Mermaid without the plugin (assuming you are not also fixing their style),
 - Work with both **light and dark color themes**.
 
-To check these requirements, a developer mode can be activated by setting the constant `DEV_MODE` to `true` in [`plugin.ts`](plugin.ts).
-In this mode, clicking the plugin button has the effect of toggling the effects of the plugin (by actually changing the IDs and deactivating the style element it contains).
+To check these requirements, you can uncomment a line in the method `createButtonFunction()` defined in [`plugin.ts`](plugin.ts), so that the method `toggleDefIDs()` is called when clicking the plugin button.
+You can then use the plugin button to toggle the effects of the plugin.
 
-Please, do not forget to set `DEV_MODE` back to `false` when done.
+Please, do not forget to comment this line again when done.
